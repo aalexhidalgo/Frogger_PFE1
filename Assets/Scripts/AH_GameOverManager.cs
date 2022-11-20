@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AH_GameOverManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void RestartButton()
     {
-        
+        SceneManager.LoadScene("Game");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ExitButton()
     {
-        
+        SceneManager.LoadScene("Main Menu");
     }
 }
