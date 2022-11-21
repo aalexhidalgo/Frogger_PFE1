@@ -21,7 +21,6 @@ public class AH_GameManager : MonoBehaviour
     void Start()
     {
         playerControllerScript = FindObjectOfType<AH_PlayerController>();
-
     }
 
     void Update()
@@ -43,6 +42,7 @@ public class AH_GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        AH_DataPersistanceScript.SaveForFutureGames();
         SceneManager.LoadScene("Game Over");
     }
 
