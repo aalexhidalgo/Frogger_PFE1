@@ -13,6 +13,9 @@ public class AH_GameManager : MonoBehaviour
     public Image lifeImage;
     public Sprite[] lifeSpriteArray;
 
+    public TextMeshProUGUI scoreText;
+    private int scoreCounter;
+
     private AH_PlayerController playerControllerScript;
 
     void Start()
@@ -23,20 +26,32 @@ public class AH_GameManager : MonoBehaviour
 
     void Update()
     {
-        if (playerControllerScript.active == true) //Te time doesn't start counting if we didn't move
+        if (playerControllerScript.active == true) //The time doesn't start counting if we didn't move
         {
             UpdateTime();
         }
     }
 
-    public void UpdateTime()
+    void UpdateTime()
     {
         TimeCounter += Time.deltaTime;
-        timeText.text = TimeCounter.ToString(); //With Mathf.Round we get the number without the miliseconds        
+        float minutes = Mathf.FloorToInt(TimeCounter / 60);
+        float seconds = Mathf.FloorToInt(TimeCounter % 60);
+        float milliSeconds = (TimeCounter % 1) * 1000;
+        timeText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliSeconds);
     }
 
     public void GameOver()
     {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("Game Over");
     }
+
+    public void UpdateScore(int score)
+    {
+        scoreCounter += score;
+        scoreText.text = scoreCounter.ToString();
+    }
+
 }
+
+

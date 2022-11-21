@@ -15,7 +15,9 @@ public class AH_PlayerController : MonoBehaviour
 
     public bool active;
 
-    public int lifeCounter = 3;
+    private int lifeCounter = 3;
+
+    private int stepScore = 5;
 
     private AH_GameManager GameManagerScript;
 
@@ -38,6 +40,7 @@ public class AH_PlayerController : MonoBehaviour
                 nextPos.y = transform.position.y + distance;
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+                GameManagerScript.UpdateScore(stepScore);
             }
 
             if (Input.GetAxisRaw("Vertical") < 0 && transform.position.y != -spaceLimits)
@@ -83,22 +86,21 @@ public class AH_PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.name.Equals("Enemy"))
-        {
+        if (other.gameObject.CompareTag("Enemy"))
+        {           
             lifeCounter--;
+            UpdateLife();
 
-            if(lifeCounter <= 0)
+            if (lifeCounter <= 0)
             {
+                lifeCounter = 0;
                 GameManagerScript.GameOver();
             }
         }
-
     }
 
-    public void UpdateLife()
+    private void UpdateLife()
     {
-        float currentImage = lifeCounter;
-        GameManagerScript.lifeImage.sprite = GameManagerScript.lifeSpriteArray[(int)currentImage];
+        GameManagerScript.lifeImage.sprite = GameManagerScript.lifeSpriteArray[lifeCounter];
     }
-
 }

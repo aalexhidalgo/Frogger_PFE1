@@ -179,6 +179,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 929a50230410f0144a97f43f3b79eb98, type: 3}
   - {fileID: 21300000, guid: 4742169605aaeee41a0585b773fc5a23, type: 3}
   - {fileID: 21300000, guid: b7478f47a5a00224c8ad2bb35b94cce6, type: 3}
+  scoreText: {fileID: 1290436319}
 --- !u!1 &255903692
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,9 +191,8 @@ GameObject:
   - component: {fileID: 255903696}
   - component: {fileID: 255903695}
   - component: {fileID: 255903694}
-  - component: {fileID: 255903697}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,27 +291,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &255903697
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255903692}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 10000
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &478658068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 999999999
+  m_text: 000000000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 50156930f94c15942bc7a19e81ab77aa, type: 2}
   m_sharedMaterial: {fileID: -3101273514100758578, guid: 50156930f94c15942bc7a19e81ab77aa, type: 2}
@@ -1250,7 +1229,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749583798}
-  m_LocalRotation: {x: -5.8581e-40, y: 1.17162e-39, z: 0, w: 1}
+  m_LocalRotation: {x: -8.74231e-40, y: 1.748462e-39, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.1500001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
