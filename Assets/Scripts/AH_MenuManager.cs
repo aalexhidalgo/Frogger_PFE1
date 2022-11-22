@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class AH_MenuManager : MonoBehaviour
 {
-    public TextMeshProUGUI scoreTimeText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timeText;
 
     public void StartButton()
     {
@@ -24,11 +25,12 @@ public class AH_MenuManager : MonoBehaviour
         Load_Time_Score();
     }
 
-    private void Load_Time_Score() //Por hacer
+    private void Load_Time_Score() //Load score in the stats panel
     {
         if (PlayerPrefs.HasKey("Score"))
         {
-            scoreTimeText.text = (PlayerPrefs.GetFloat("Score")).ToString();
+            scoreText.text = (PlayerPrefs.GetInt("Score")).ToString();
+            timeText.text = string.Format("{0:00}:{1:00}:{2:000}", (PlayerPrefs.GetFloat("Minutes")), (PlayerPrefs.GetFloat("Seconds")), (PlayerPrefs.GetFloat("Miliseconds")));
         }
     }
 }

@@ -10,6 +10,7 @@ public class AH_GameOverManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
 
+    #region Buttons
     public void RestartButton()
     {
         SceneManager.LoadScene("Game");
@@ -19,9 +20,18 @@ public class AH_GameOverManager : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
-
-    public void Load_Score_Time() //Por continuar
+    #endregion
+    private void Start()
     {
+        Load_Score_Time();
+    }
 
+    public void Load_Score_Time()
+    {
+        if(PlayerPrefs.HasKey("Score"))
+        {
+            scoreText.text = (PlayerPrefs.GetInt("Score")).ToString();
+            timeText.text = string.Format("{0:00}:{1:00}:{2:000}", (PlayerPrefs.GetFloat("Minutes")), (PlayerPrefs.GetFloat("Seconds")), (PlayerPrefs.GetFloat("Miliseconds")));
+        }
     }
 }

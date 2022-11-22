@@ -14,7 +14,7 @@ public class AH_GameManager : MonoBehaviour
     public Sprite[] lifeSpriteArray;
 
     public TextMeshProUGUI scoreText;
-    private int scoreCounter;
+    public int scoreCounter;
 
     private AH_PlayerController playerControllerScript;
 
@@ -36,20 +36,25 @@ public class AH_GameManager : MonoBehaviour
         TimeCounter += Time.deltaTime;
         float minutes = Mathf.FloorToInt(TimeCounter / 60);
         float seconds = Mathf.FloorToInt(TimeCounter % 60);
-        float milliSeconds = (TimeCounter % 1) * 1000;
-        timeText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliSeconds);
-    }
+        float miliseconds = (TimeCounter % 1) * 1000;
+        timeText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, miliseconds);
 
-    public void GameOver()
-    {
-        AH_DataPersistanceScript.SaveForFutureGames();
-        SceneManager.LoadScene("Game Over");
+        AH_DataPersistance.PlayerStats.minutes = minutes;
+        AH_DataPersistance.PlayerStats.seconds = seconds;
+        AH_DataPersistance.PlayerStats.miliseconds = miliseconds;
     }
 
     public void UpdateScore(int score)
     {
         scoreCounter += score;
         scoreText.text = scoreCounter.ToString();
+        AH_DataPersistance.PlayerStats.score = scoreCounter;
+    }
+
+    public void GameOver()
+    {
+        AH_DataPersistance.PlayerStats.SaveForFutureGames(); //Before we die we save the values in data persistance
+        SceneManager.LoadScene("Game Over");
     }
 
 }

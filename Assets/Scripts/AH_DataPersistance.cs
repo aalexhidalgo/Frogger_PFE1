@@ -8,11 +8,11 @@ public class AH_DataPersistance : MonoBehaviour
     public static AH_DataPersistance PlayerStats;
 
     //Variables
-    public static int score;
+    public int score;
 
-    public static float minutes;
-    public static float seconds;
-    public static float miliseconds;
+    public float minutes;
+    public float seconds;
+    public float miliseconds;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class AH_DataPersistance : MonoBehaviour
         }
     }
 
-    public static void SaveForFutureGames()
+    public void SaveForFutureGames()
     {
         PlayerPrefs.SetInt("Score", score);
 

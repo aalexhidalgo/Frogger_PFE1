@@ -540,6 +540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c42ea0612cbf54e91ebc009bf5092b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 5867848085839508629}
+  timeText: {fileID: 381488556}
 --- !u!4 &1422374352
 Transform:
   m_ObjectHideFlags: 0
@@ -1468,7 +1470,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
