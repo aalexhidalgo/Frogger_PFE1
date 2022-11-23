@@ -301,8 +301,8 @@ TextureImporter:
         y: 190
         width: 12
         height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.58}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -469,8 +469,8 @@ TextureImporter:
         y: 172
         width: 12
         height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.58}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -550,9 +550,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 91
-        y: 154
+        y: 173
         width: 16
-        height: 32
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -720,7 +720,7 @@ TextureImporter:
         x: 110
         y: 154
         width: 15
-        height: 12
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -735,27 +735,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Frogger - General Sheet_30
-      rect:
-        serializedVersion: 2
-        x: 113
-        y: 163
-        width: 9
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1ea407e299c73254c85988d3f7872f05
-      internalID: -161218249
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Arcade - Frogger - General Sheet_31
       rect:
         serializedVersion: 2
@@ -763,8 +742,8 @@ TextureImporter:
         y: 136
         width: 10
         height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -784,8 +763,8 @@ TextureImporter:
         y: 139
         width: 13
         height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1784,6 +1763,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Arcade - Frogger - General Sheet_80
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 154
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b97695d5a1eee8488d04e74a04ba467
+      internalID: -517232105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1854,6 +1854,7 @@ TextureImporter:
       Arcade - Frogger - General Sheet_1: -252156717
       Arcade - Frogger - General Sheet_23: -2135253090
       Arcade - Frogger - General Sheet_54: 706075676
+      Arcade - Frogger - General Sheet_80: 516125213
       Arcade - Frogger - General Sheet_19: -1559353212
       Arcade - Frogger - General Sheet_39: 1572551166
       Arcade - Frogger - General Sheet_9: -1593736817

@@ -9,7 +9,6 @@ public class AH_GameOverManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
-
     #region Buttons
     public void RestartButton()
     {

@@ -91,6 +91,8 @@ public class AH_PlayerController : MonoBehaviour
             lifeCounter--;
             UpdateLife();
 
+            //Blink effect
+
             if (lifeCounter <= 0)
             {
                 lifeCounter = 0;
