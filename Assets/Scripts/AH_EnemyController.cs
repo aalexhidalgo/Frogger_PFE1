@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AH_EnemyController : MonoBehaviour
 {
-    private float spaceLimit = 4f;
+    private float spaceLimit = 4.5f;
     public float speed;
 
     void Start()

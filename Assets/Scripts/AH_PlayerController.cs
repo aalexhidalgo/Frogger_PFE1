@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AH_PlayerController : MonoBehaviour
 {
-    private float spaceLimits = 4f;
+    private float spaceLimits = 4.5f;
     private float distance = 1f; //Distance between steps
-    private Vector3 nextPos;
+    private Vector2 nextPos;
+    private Vector2 InitialPos = new Vector2(0.5f, -4.5f);
 
     private bool isJumping;
 
@@ -19,6 +20,8 @@ public class AH_PlayerController : MonoBehaviour
 
     private int stepScore = 5;
 
+    private bool canMove = true;
+
     private AH_GameManager GameManagerScript;
 
     void Awake()
@@ -28,25 +31,30 @@ public class AH_PlayerController : MonoBehaviour
         GameManagerScript = FindObjectOfType<AH_GameManager>();
     }
 
+    void Start()
+    {
+        transform.position = InitialPos;
+    }
+
     void Update()
     {
         //Player Movement
 
-        if (isJumping == false) //As a cooldown, we cannot press a key if we didn't arive to the new position
+        if (isJumping == false && canMove) //As a cooldown, we cannot press a key if we didn't arive to the new position
         {
             if (Input.GetAxisRaw("Vertical") > 0)
             {
                 StartCoroutine(Movement());
-                nextPos.y = transform.position.y + distance;
+                nextPos = new Vector2(transform.position.x, transform.position.y + distance);
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 GameManagerScript.UpdateScore(stepScore);
             }
 
-            if (Input.GetAxisRaw("Vertical") < 0 && transform.position.y != -spaceLimits)
+            if (Input.GetAxisRaw("Vertical") < 0 && transform.position.y != -spaceLimits) //Temporal, no ha de ir hacia atrás
             {
                 StartCoroutine(Movement());
-                nextPos.y = transform.position.y - distance;
+                nextPos = new Vector2(transform.position.x, transform.position.y - distance);
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, -180);
             }
@@ -54,7 +62,7 @@ public class AH_PlayerController : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") > 0 && transform.position.x != spaceLimits)
             {
                 StartCoroutine(Movement());
-                nextPos.x = transform.position.x + distance;
+                nextPos = new Vector2(transform.position.x + distance, transform.position.y);
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, -90);
             }
@@ -62,7 +70,7 @@ public class AH_PlayerController : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") < 0 && transform.position.x != -spaceLimits)
             {
                 StartCoroutine(Movement());
-                nextPos.x = transform.position.x - distance;
+                nextPos = new Vector2(transform.position.x - distance, transform.position.y);
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, 90);
             }
@@ -92,6 +100,7 @@ public class AH_PlayerController : MonoBehaviour
             UpdateLife();
 
             //Blink effect
+            //Meter corrutina menos a la hora de valer 0
 
             if (lifeCounter <= 0)
             {
@@ -105,4 +114,10 @@ public class AH_PlayerController : MonoBehaviour
     {
         GameManagerScript.lifeImage.sprite = GameManagerScript.lifeSpriteArray[lifeCounter];
     }
+
+    /*private IEnumerator()
+    {
+        //canMove = false;
+        //hacer true la animación del alpha cuando se acabe la animación can Move vuelve a valer true
+    }*/
 }
