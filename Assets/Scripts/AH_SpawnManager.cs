@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class AH_SpawnManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject[] CarPrefabs;
+    public float[] CarYPos;
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RandomPos()
     {
 
     }
