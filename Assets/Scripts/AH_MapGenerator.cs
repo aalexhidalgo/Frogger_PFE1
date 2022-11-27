@@ -35,11 +35,19 @@ public class AH_MapGenerator : MonoBehaviour
         currentBlocks.Add(currentBlock);
     }
 
-    public void GenerateMapBlocks() //Generates map blocks until it reaches 7
+    public void GenerateMapBlocks() //Generates map blocks until it reaches 5
     {
-        for (int i = 0; i < 7; i++) //cambiar número
+        for (int i = 0; i < 5; i++)
         {
             AddMapBlock();
         }
+    }
+
+    public void RemoveBlock()
+    {
+        //Removes the map block on the position 0 from the list and also from the scene.
+        AH_MapBlock oldestBlock = currentBlocks[0];
+        currentBlocks.Remove(oldestBlock);
+        Destroy(oldestBlock.gameObject);
     }
 }

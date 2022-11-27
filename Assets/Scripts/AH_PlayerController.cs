@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AH_PlayerController : MonoBehaviour
 {
-    private float spaceLimits = 4.5f;
+    private float spaceLimits = 4f;
     private float distance = 1f; //Distance between steps
     private Vector2 nextPos;
-    private Vector2 InitialPos = new Vector2(0.5f, -4.5f);
+    private Vector2 InitialPos = new Vector2(0f, -4.5f);
 
     private bool isJumping;
 
