@@ -22,6 +22,8 @@ public class AH_PlayerController : MonoBehaviour
 
     private bool canMove = true;
 
+    public bool isOnTree, isOnWater;
+
     private AH_GameManager GameManagerScript;
 
     void Awake()
@@ -76,6 +78,13 @@ public class AH_PlayerController : MonoBehaviour
             }
         }
 
+        if (isOnWater == true && isOnTree == false) // Arreglo temporal muerte instantánea
+        {
+            lifeCounter = 0;
+            UpdateLife();
+            GameManagerScript.GameOver();
+        }
+
     }
 
     private void LateUpdate()
@@ -92,6 +101,7 @@ public class AH_PlayerController : MonoBehaviour
         isJumping = false;
     }
 
+    //Colision y trigger
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -107,6 +117,32 @@ public class AH_PlayerController : MonoBehaviour
                 lifeCounter = 0;
                 GameManagerScript.GameOver();
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Water")) //GAMEOVER instantly
+        {
+            isOnWater = true;
+        }
+        if (other.gameObject.CompareTag("Tree")) //In Tree Platform
+        {
+            isOnTree = true;
+            transform.parent = other.transform;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Water"))
+        {
+            isOnWater = false;
+        }
+        if (other.gameObject.CompareTag("Tree")) //Outside Tree Platform
+        {
+            isOnTree = false;
+            transform.parent = null;
         }
     }
 

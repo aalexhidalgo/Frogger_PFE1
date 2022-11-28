@@ -39,7 +39,7 @@ public class AH_MapGenerator : MonoBehaviour
 
     public void GenerateMapBlocks() //Generates map blocks until it reaches 5
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 2; i++)
         {
             AddMapBlock();
         }
