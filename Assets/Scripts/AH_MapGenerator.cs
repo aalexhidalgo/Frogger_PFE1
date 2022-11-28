@@ -7,10 +7,12 @@ public class AH_MapGenerator : MonoBehaviour
     public List<AH_MapBlock> MapBlocks = new List<AH_MapBlock>(); //List with all the map blocks
     public Transform GameStartPoint;
     public List<AH_MapBlock> currentBlocks = new List<AH_MapBlock>(); //Currentblocks in the scene (clone)
+    private GameObject FirstMapBlock;
 
     private void Start()
     {
         GenerateMapBlocks();
+        FirstMapBlock = GameObject.Find("FirstMapBlock");
     }
 
     public void AddMapBlock()
@@ -49,5 +51,6 @@ public class AH_MapGenerator : MonoBehaviour
         AH_MapBlock oldestBlock = currentBlocks[0];
         currentBlocks.Remove(oldestBlock);
         Destroy(oldestBlock.gameObject);
+        Destroy(FirstMapBlock);
     }
 }
