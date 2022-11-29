@@ -25,4 +25,8 @@ public class AH_EnemyController : MonoBehaviour
     }
 
     //A medida que pase el tiempo incrementamos la velocidad de los coches
+    public void IncreaseSpeed(float time) //Por hacer
+    {
+        speed += 1;
+    }
 }

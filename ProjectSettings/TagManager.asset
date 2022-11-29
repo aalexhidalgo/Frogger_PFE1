@@ -8,7 +8,8 @@ TagManager:
   - Ground
   - EndPoint
   - Water
-  - Tree
+  - Platform
+  - Turtle
   layers:
   - Default
   - TransparentFX

@@ -13,24 +13,29 @@ public class AH_PlayerController : MonoBehaviour
 
     private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
+    private SpriteRenderer playerRenderer;
 
     public bool active;
+    private bool canMove = true;
 
     private int lifeCounter = 3;
 
     private int stepScore = 5;
 
-    private bool canMove = true;
+    public bool isOnPlatform, isOnWater;
 
-    public bool isOnTree, isOnWater;
+    public GameObject bombDeathPrefab;
 
     private AH_GameManager GameManagerScript;
+    private AH_TurtleAnim TurtleAnimScript;
 
     void Awake()
     {
         playerAnimator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody2D>();
+        playerRenderer = GetComponent<SpriteRenderer>();
         GameManagerScript = FindObjectOfType<AH_GameManager>();
+        TurtleAnimScript = FindObjectOfType<AH_TurtleAnim>();
     }
 
     void Start()
@@ -77,14 +82,6 @@ public class AH_PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 90);
             }
         }
-
-        if (isOnWater == true && isOnTree == false) // Arreglo temporal muerte instantánea
-        {
-            lifeCounter = 0;
-            UpdateLife();
-            GameManagerScript.GameOver();
-        }
-
     }
 
     private void LateUpdate()
@@ -101,35 +98,52 @@ public class AH_PlayerController : MonoBehaviour
         isJumping = false;
     }
 
-    //Colision y trigger
-    private void OnCollisionEnter2D(Collision2D other)
+    //Trigger: Platforms
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
-        {           
+        {
             lifeCounter--;
             UpdateLife();
 
-            //Blink effect
+            //Blink effect o otro (partículas)
             //Meter corrutina menos a la hora de valer 0
 
             if (lifeCounter <= 0)
             {
                 lifeCounter = 0;
-                GameManagerScript.GameOver();
+                StartCoroutine(Death_1());
             }
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
         if (other.gameObject.CompareTag("Water")) //GAMEOVER instantly
         {
             isOnWater = true;
+            if (isOnWater == true && isOnPlatform == false) // (NOT) Arreglo temporal muerte instantáneas
+            {
+                lifeCounter = 0;
+                UpdateLife();
+            }
         }
-        if (other.gameObject.CompareTag("Tree")) //In Tree Platform
+        if (other.gameObject.CompareTag("Platform")) //In Tree Platform
         {
-            isOnTree = true;
+            isOnPlatform = true;
             transform.parent = other.transform;
+        }
+        if(other.gameObject.CompareTag("Turtle")) //Funciona :D
+        {
+            if (TurtleAnimScript.underWater == true)
+            {
+                Debug.Log("Hola");
+                lifeCounter--;
+                UpdateLife();
+
+                if (lifeCounter <= 0)
+                {
+                    lifeCounter = 0;
+                    StartCoroutine(Death_1()); //GAMEOVER instantly
+                }
+            }
         }
     }
 
@@ -139,9 +153,9 @@ public class AH_PlayerController : MonoBehaviour
         {
             isOnWater = false;
         }
-        if (other.gameObject.CompareTag("Tree")) //Outside Tree Platform
+        if (other.gameObject.CompareTag("Platform")) //Outside Tree Platform
         {
-            isOnTree = false;
+            isOnPlatform = false;
             transform.parent = null;
         }
     }
@@ -151,9 +165,15 @@ public class AH_PlayerController : MonoBehaviour
         GameManagerScript.lifeImage.sprite = GameManagerScript.lifeSpriteArray[lifeCounter];
     }
 
-    /*private IEnumerator()
+    private IEnumerator Death_1()
     {
-        //canMove = false;
-        //hacer true la animación del alpha cuando se acabe la animación can Move vuelve a valer true
-    }*/
+        canMove = false;
+        Color color = playerRenderer.color;
+        color = new Color(color.r, color.g, color.b, 0);
+        playerRenderer.color = color;
+        Instantiate(bombDeathPrefab, transform.position, bombDeathPrefab.transform.rotation);
+        yield return new WaitForSeconds(1.5f);
+        GameManagerScript.GameOver();
+    }
+
 }
