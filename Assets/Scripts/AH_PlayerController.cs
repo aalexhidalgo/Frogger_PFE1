@@ -23,6 +23,7 @@ public class AH_PlayerController : MonoBehaviour
     private int stepScore = 5;
 
     public bool isOnPlatform, isOnWater;
+    public bool cooldown, attack;
 
     public GameObject bombDeathPrefab;
 
@@ -82,6 +83,11 @@ public class AH_PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 90);
             }
         }
+
+        if(transform.position.x > spaceLimits || transform.position.x < -spaceLimits) //In case we have been on a tree and we touch a limit
+        {
+            GameManagerScript.GameOver();
+        }
     }
 
     private void LateUpdate()
@@ -106,6 +112,12 @@ public class AH_PlayerController : MonoBehaviour
             lifeCounter--;
             UpdateLife();
 
+            if (lifeCounter < 0)
+            {
+                GameObject SpawnPoint = GameObject.Find("SpawnPoint");
+                gameObject.transform.position = SpawnPoint.transform.position;
+            }
+
             //Blink effect o otro (partículas)
             //Meter corrutina menos a la hora de valer 0
 
@@ -119,32 +131,63 @@ public class AH_PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Water")) //GAMEOVER instantly
         {
             isOnWater = true;
-            if (isOnWater == true && isOnPlatform == false) // (NOT) Arreglo temporal muerte instantáneas
-            {
-                lifeCounter = 0;
-                UpdateLife();
-            }
+            lifeCounter--;
+            UpdateLife();
         }
         if (other.gameObject.CompareTag("Platform")) //In Tree Platform
         {
             isOnPlatform = true;
             transform.parent = other.transform;
         }
-        if(other.gameObject.CompareTag("Turtle")) //Funciona :D
+
+        if(other.gameObject.CompareTag("Turtle")) //Funciona :D (Hacer padre de las tortugitas)
         {
             if (TurtleAnimScript.underWater == true)
             {
                 Debug.Log("Hola");
+                cooldown = false;
                 lifeCounter--;
                 UpdateLife();
 
-                if (lifeCounter <= 0)
+                if (lifeCounter <= 0 && attack == true)
                 {
                     lifeCounter = 0;
                     StartCoroutine(Death_1()); //GAMEOVER instantly
                 }
             }
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Turtle")) //Funciona :D (Hacer padre de las tortugitas)
+        {
+            if (TurtleAnimScript.underWater == true)
+            {
+                if(cooldown == false)
+                {
+                    StartCoroutine(LifeCooldown());
+                } 
+                UpdateLife();
+
+                if (lifeCounter <= 0)
+                {
+                    lifeCounter = 0;
+                    if(attack == true) //Por arreglar
+                    {
+                        StartCoroutine(Death_1()); //GAMEOVER instantly
+                    }
+                }
+            }
+        }
+    }
+
+    private IEnumerator LifeCooldown()
+    {
+        lifeCounter--;  //Tiempo underwater
+        cooldown = true;
+        yield return new WaitForSeconds(2f); //Hay que configurarlo
+        cooldown = false;
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -172,6 +215,7 @@ public class AH_PlayerController : MonoBehaviour
         color = new Color(color.r, color.g, color.b, 0);
         playerRenderer.color = color;
         Instantiate(bombDeathPrefab, transform.position, bombDeathPrefab.transform.rotation);
+        attack = false;
         yield return new WaitForSeconds(1.5f);
         GameManagerScript.GameOver();
     }
