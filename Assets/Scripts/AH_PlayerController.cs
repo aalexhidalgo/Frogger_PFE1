@@ -131,9 +131,17 @@ public class AH_PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Water")) //GAMEOVER instantly
         {
             isOnWater = true;
+
             lifeCounter--;
             UpdateLife();
+
+            if (lifeCounter <= 0)
+            {
+                lifeCounter = 0;
+                StartCoroutine(Death_1());
+            }
         }
+
         if (other.gameObject.CompareTag("Platform")) //In Tree Platform
         {
             isOnPlatform = true;
@@ -142,6 +150,8 @@ public class AH_PlayerController : MonoBehaviour
 
         if(other.gameObject.CompareTag("Turtle")) //Funciona :D (Hacer padre de las tortugitas)
         {
+            attack = true;
+
             if (TurtleAnimScript.underWater == true)
             {
                 Debug.Log("Hola");
@@ -149,7 +159,7 @@ public class AH_PlayerController : MonoBehaviour
                 lifeCounter--;
                 UpdateLife();
 
-                if (lifeCounter <= 0 && attack == true)
+                if (lifeCounter <= 0)
                 {
                     lifeCounter = 0;
                     StartCoroutine(Death_1()); //GAMEOVER instantly
@@ -173,6 +183,7 @@ public class AH_PlayerController : MonoBehaviour
                 if (lifeCounter <= 0)
                 {
                     lifeCounter = 0;
+
                     if(attack == true) //Por arreglar
                     {
                         StartCoroutine(Death_1()); //GAMEOVER instantly
@@ -184,9 +195,9 @@ public class AH_PlayerController : MonoBehaviour
 
     private IEnumerator LifeCooldown()
     {
-        lifeCounter--;  //Tiempo underwater
+        lifeCounter--;
         cooldown = true;
-        yield return new WaitForSeconds(2f); //Hay que configurarlo
+        yield return new WaitForSeconds(2f);
         cooldown = false;
     }
 
