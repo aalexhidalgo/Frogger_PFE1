@@ -6,8 +6,8 @@ public class AH_PlayerController : MonoBehaviour
 {
     private float spaceLimits = 4f;
     private float distance = 1f; //Distance between steps
-    private Vector2 nextPos;
-    private Vector2 InitialPos = new Vector2(0f, -4.5f);
+    private Vector2 nextPos, respawnPos, maxPos;
+    private Vector2 InitialPos = new Vector2(0f, -5.5f);
 
     private bool isJumping;
 
@@ -42,6 +42,7 @@ public class AH_PlayerController : MonoBehaviour
     void Start()
     {
         transform.position = InitialPos;
+        maxPos = transform.position;
     }
 
     void Update()
@@ -56,7 +57,11 @@ public class AH_PlayerController : MonoBehaviour
                 nextPos = new Vector2(transform.position.x, transform.position.y + distance);
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                GameManagerScript.UpdateScore(stepScore);
+
+                if(maxPos.y < nextPos.y)
+                {
+                    GameManagerScript.UpdateScore(stepScore);
+                }
             }
 
             if (Input.GetAxisRaw("Vertical") < 0 && transform.position.y != -spaceLimits) //Temporal, no ha de ir hacia atrás
@@ -109,13 +114,15 @@ public class AH_PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            maxPos = transform.position;
             lifeCounter--;
             UpdateLife();
-
+            transform.position = respawnPos;
+            
             if (lifeCounter < 0)
             {
-                GameObject SpawnPoint = GameObject.Find("SpawnPoint");
-                gameObject.transform.position = SpawnPoint.transform.position;
+                lifeCounter = 0;
+                StartCoroutine(Death_1());
             }
 
             //Blink effect o otro (partículas)
@@ -131,15 +138,7 @@ public class AH_PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Water")) //GAMEOVER instantly
         {
             isOnWater = true;
-
-            lifeCounter--;
-            UpdateLife();
-
-            if (lifeCounter <= 0)
-            {
-                lifeCounter = 0;
-                StartCoroutine(Death_1());
-            }
+            cooldown = false;
         }
 
         if (other.gameObject.CompareTag("Platform")) //In Tree Platform
@@ -166,6 +165,11 @@ public class AH_PlayerController : MonoBehaviour
                 }
             }
         }
+
+        if (other.gameObject.CompareTag("RespawnPoint"))
+        {
+            respawnPos = transform.position;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -176,15 +180,39 @@ public class AH_PlayerController : MonoBehaviour
             {
                 if(cooldown == false)
                 {
-                    StartCoroutine(LifeCooldown());
-                } 
+                    StartCoroutine(LifeCooldown_Turtle());
+                }
+                
                 UpdateLife();
 
                 if (lifeCounter <= 0)
                 {
                     lifeCounter = 0;
 
-                    if(attack == true) //Por arreglar
+                    if(attack == true)
+                    {
+                        StartCoroutine(Death_1());
+                    }
+                }
+            }
+        }
+
+        if (other.gameObject.CompareTag("Water")) //GAMEOVER instantly
+        {
+            if (isOnPlatform == false)
+            {
+                if (cooldown == false)
+                {
+                    StartCoroutine(LifeCooldown_Water());
+                }
+
+                UpdateLife();
+
+                if (lifeCounter <= 0)
+                {
+                    lifeCounter = 0;
+
+                    if (isOnWater == true) //Por arreglar
                     {
                         StartCoroutine(Death_1()); //GAMEOVER instantly
                     }
@@ -193,12 +221,19 @@ public class AH_PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator LifeCooldown()
+    private IEnumerator LifeCooldown_Turtle()
     {
         lifeCounter--;
         cooldown = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f); //En este tiempo la tortuga no ataca
         cooldown = false;
+    }
+
+    private IEnumerator LifeCooldown_Water()
+    {
+        lifeCounter--;
+        cooldown = true;
+        yield return new WaitForSeconds(0.01f);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -226,9 +261,14 @@ public class AH_PlayerController : MonoBehaviour
         color = new Color(color.r, color.g, color.b, 0);
         playerRenderer.color = color;
         Instantiate(bombDeathPrefab, transform.position, bombDeathPrefab.transform.rotation);
+        isOnWater = false;
         attack = false;
         yield return new WaitForSeconds(1.5f);
         GameManagerScript.GameOver();
     }
 
+    private void Death_2()
+    {
+        //particulas muerte normal
+    }
 }

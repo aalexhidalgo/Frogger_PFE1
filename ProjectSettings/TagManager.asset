@@ -10,6 +10,7 @@ TagManager:
   - Water
   - Platform
   - Turtle
+  - RespawnPoint
   layers:
   - Default
   - TransparentFX
