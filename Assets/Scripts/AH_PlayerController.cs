@@ -58,7 +58,7 @@ public class AH_PlayerController : MonoBehaviour
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
 
-                if(maxPos.y < nextPos.y)
+                if (maxPos.y < nextPos.y)
                 {
                     GameManagerScript.UpdateScore(stepScore);
                 }
@@ -89,7 +89,7 @@ public class AH_PlayerController : MonoBehaviour
             }
         }
 
-        if(transform.position.x > spaceLimits || transform.position.x < -spaceLimits) //In case we have been on a tree and we touch a limit
+        if (transform.position.x > spaceLimits || transform.position.x < -spaceLimits) //In case we have been on a tree and we touch a limit
         {
             GameManagerScript.GameOver();
         }
@@ -118,11 +118,11 @@ public class AH_PlayerController : MonoBehaviour
             lifeCounter--;
             UpdateLife();
             transform.position = respawnPos;
-            
+
             if (lifeCounter < 0)
             {
                 lifeCounter = 0;
-                StartCoroutine(Death_1());
+                StartCoroutine(GameOver_Death());
             }
 
             //Blink effect o otro (partículas)
@@ -131,7 +131,7 @@ public class AH_PlayerController : MonoBehaviour
             if (lifeCounter <= 0)
             {
                 lifeCounter = 0;
-                StartCoroutine(Death_1());
+                StartCoroutine(GameOver_Death());
             }
         }
 
@@ -147,7 +147,7 @@ public class AH_PlayerController : MonoBehaviour
             transform.parent = other.transform;
         }
 
-        if(other.gameObject.CompareTag("Turtle")) //Funciona :D (Hacer padre de las tortugitas)
+        if (other.gameObject.CompareTag("Turtle")) //Funciona :D (Hacer padre de las tortugitas)
         {
             attack = true;
 
@@ -161,7 +161,7 @@ public class AH_PlayerController : MonoBehaviour
                 if (lifeCounter <= 0)
                 {
                     lifeCounter = 0;
-                    StartCoroutine(Death_1()); //GAMEOVER instantly
+                    StartCoroutine(GameOver_Death()); //GAMEOVER instantly
                 }
             }
         }
@@ -178,20 +178,20 @@ public class AH_PlayerController : MonoBehaviour
         {
             if (TurtleAnimScript.underWater == true)
             {
-                if(cooldown == false)
+                if (cooldown == false)
                 {
                     StartCoroutine(LifeCooldown_Turtle());
                 }
-                
+
                 UpdateLife();
 
                 if (lifeCounter <= 0)
                 {
                     lifeCounter = 0;
 
-                    if(attack == true)
+                    if (attack == true)
                     {
-                        StartCoroutine(Death_1());
+                        StartCoroutine(GameOver_Death());
                     }
                 }
             }
@@ -214,7 +214,7 @@ public class AH_PlayerController : MonoBehaviour
 
                     if (isOnWater == true) //Por arreglar
                     {
-                        StartCoroutine(Death_1()); //GAMEOVER instantly
+                        StartCoroutine(GameOver_Death()); //GAMEOVER instantly
                     }
                 }
             }
@@ -254,7 +254,7 @@ public class AH_PlayerController : MonoBehaviour
         GameManagerScript.lifeImage.sprite = GameManagerScript.lifeSpriteArray[lifeCounter];
     }
 
-    private IEnumerator Death_1()
+    private IEnumerator GameOver_Death()
     {
         canMove = false;
         Color color = playerRenderer.color;
@@ -267,8 +267,12 @@ public class AH_PlayerController : MonoBehaviour
         GameManagerScript.GameOver();
     }
 
-    private void Death_2()
+    private void Normal_Death()
     {
-        //particulas muerte normal
+        //particulas muerte normal, igual que con el enemigo de rpg 2d
     }
+
+    //Mysterybox hacer lógica: de manera random puedes o bien recuperar una vida (si ya tienes 3 se suman 100 puntos al scoreCounter) o tener x segundos de invencibilidad o sumar 250 puntos.
+    //Falta sonido y post-procesado
+    //Ranking de score
 }
