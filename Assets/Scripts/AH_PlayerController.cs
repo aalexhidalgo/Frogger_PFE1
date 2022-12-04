@@ -9,7 +9,7 @@ public class AH_PlayerController : MonoBehaviour
     private Vector2 nextPos, respawnPos, maxPos;
     private Vector2 InitialPos = new Vector2(0f, -5.5f);
 
-    private bool isJumping;
+    private bool isJumping, isInvincible;
 
     private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
@@ -29,6 +29,8 @@ public class AH_PlayerController : MonoBehaviour
 
     private AH_GameManager GameManagerScript;
     private AH_TurtleAnim TurtleAnimScript;
+
+    public int randIndx;
 
     void Awake()
     {
@@ -98,6 +100,7 @@ public class AH_PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         playerAnimator.SetBool("IsJumping", isJumping);
+        playerAnimator.SetBool("IsInvincible", isInvincible);
     }
 
     //Animation transition betweens steps
@@ -169,6 +172,31 @@ public class AH_PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("RespawnPoint"))
         {
             respawnPos = transform.position;
+        }
+
+        if (other.gameObject.CompareTag("MysteryBox"))
+        {
+            randIndx = Random.Range(0, 3);
+
+            if (randIndx == 0)
+            {
+                lifeCounter++;
+                UpdateLife();
+
+                if (lifeCounter == 3)
+                {
+                    lifeCounter = 3;
+                    GameManagerScript.UpdateScore(100);
+                }
+            }
+            else if (randIndx == 1)
+            {
+                StartCoroutine(Temporal_Invincibility());
+            }
+            else if (randIndx == 2)
+            {
+                GameManagerScript.UpdateScore(250);
+            }
         }
     }
 
@@ -242,7 +270,7 @@ public class AH_PlayerController : MonoBehaviour
         {
             isOnWater = false;
         }
-        if (other.gameObject.CompareTag("Platform")) //Outside Tree Platform
+        if (other.gameObject.CompareTag("Platform")) //Outside platform
         {
             isOnPlatform = false;
             transform.parent = null;
@@ -272,7 +300,12 @@ public class AH_PlayerController : MonoBehaviour
         //particulas muerte normal, igual que con el enemigo de rpg 2d
     }
 
-    //Mysterybox hacer lógica: de manera random puedes o bien recuperar una vida (si ya tienes 3 se suman 100 puntos al scoreCounter) o tener x segundos de invencibilidad o sumar 250 puntos.
+    private IEnumerator Temporal_Invincibility()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(10f); //Invencibilidad de 10 segundos
+        isInvincible = false;
+    }
     //Falta sonido y post-procesado
     //Ranking de score
 }
