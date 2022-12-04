@@ -306,6 +306,7 @@ public class AH_PlayerController : MonoBehaviour
         yield return new WaitForSeconds(10f); //Invencibilidad de 10 segundos
         isInvincible = false;
     }
+
     //Falta sonido y post-procesado
     //Ranking de score
 }
