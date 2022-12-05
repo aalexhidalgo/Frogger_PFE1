@@ -16,6 +16,7 @@ public class AH_MenuManager : MonoBehaviour
 
     public void StartButton()
     {
+        AH_DataPersistance.PlayerStats.SaveForFutureGames();
         SceneManager.LoadScene("Game");
     }
 
@@ -61,5 +62,6 @@ public class AH_MenuManager : MonoBehaviour
         }
 
         skinImage.sprite = skinArray[skinSelected];
+        AH_DataPersistance.PlayerStats.skinSelected = skinSelected;
     }
 }

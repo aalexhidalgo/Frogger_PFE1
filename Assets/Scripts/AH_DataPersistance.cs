@@ -14,19 +14,21 @@ public class AH_DataPersistance : MonoBehaviour
     public float seconds;
     public float miliseconds;
 
+    public int skinSelected;
+
     void Awake()
     {
-        // Si la instancia no existe
+        //If the instance doesn't exist
         if (PlayerStats == null)
         {
-            // Configuramos la instancia
+            //We set the instance
             PlayerStats = this;
-            // Nos aseguramos de que no sea destruida con el cambio de escena
+            //We make sure to not destroy it after the scene change
             DontDestroyOnLoad(PlayerStats);
         }
         else
         {
-            // Como ya existe una instancia, destruimos la copia
+            //Because a instance already exists, we deastroy the cloned one
             Destroy(this);
         }
     }
@@ -38,5 +40,7 @@ public class AH_DataPersistance : MonoBehaviour
         PlayerPrefs.SetFloat("Minutes", minutes);
         PlayerPrefs.SetFloat("Seconds", seconds);
         PlayerPrefs.SetFloat("Miliseconds", miliseconds);
+
+        PlayerPrefs.SetInt("Skin_Selected", skinSelected);
     }
 }

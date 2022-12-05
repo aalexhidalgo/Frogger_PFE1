@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class AH_GameManager : MonoBehaviour
 {
@@ -18,11 +19,20 @@ public class AH_GameManager : MonoBehaviour
 
     public bool gameOver;
 
+    public GameObject[] skinArray;
+    private CinemachineVirtualCamera cvCamera;
+
     private AH_PlayerController playerControllerScript;
 
+    void Awake()
+    {
+        LoadSkin();
+    }
     void Start()
     {
         playerControllerScript = FindObjectOfType<AH_PlayerController>();
+        cvCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        cvCamera.Follow = skinArray[AH_DataPersistance.PlayerStats.skinSelected].transform;
     }
 
     void Update()
@@ -57,6 +67,11 @@ public class AH_GameManager : MonoBehaviour
     {
         AH_DataPersistance.PlayerStats.SaveForFutureGames(); //Before we die we save the values in data persistance
         SceneManager.LoadScene("Game Over");
+    }
+
+    private void LoadSkin()
+    {
+        skinArray[AH_DataPersistance.PlayerStats.skinSelected].SetActive(true);
     }
 
 }
