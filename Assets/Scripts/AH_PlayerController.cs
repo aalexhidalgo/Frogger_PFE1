@@ -20,7 +20,7 @@ public class AH_PlayerController : MonoBehaviour
     public bool active;
     private bool canMove = true;
 
-    private int lifeCounter = 3;
+    public int lifeCounter = 3;
 
     private int stepScore = 5;
 
@@ -124,17 +124,10 @@ public class AH_PlayerController : MonoBehaviour
         {
             maxPos = transform.position;
 
-            if(isInmortal == false && lifeCounter > 0)
+            if(isInmortal == false)
             {
-                StartCoroutine("Normal_Death");
-                vg.intensity.value = 0;             
-            }
-
-            if (lifeCounter <= 0)
-            {
-                transform.position = nextPos;
-                lifeCounter = 0;
-                StartCoroutine(GameOver_Death());
+                StartCoroutine(Death());
+                //vg.intensity.value = 0;              
             }
         }
 
@@ -183,7 +176,7 @@ public class AH_PlayerController : MonoBehaviour
                 lifeCounter++;
                 UpdateLife();
 
-                if (lifeCounter == 3)
+                if (lifeCounter >= 3)
                 {
                     lifeCounter = 3;
                     GameManagerScript.UpdateScore(100);
@@ -288,9 +281,37 @@ public class AH_PlayerController : MonoBehaviour
         GameManagerScript.lifeImage.sprite = GameManagerScript.lifeSpriteArray[lifeCounter];
     }
 
+    private IEnumerator Death()
+    {
+        lifeCounter--;
+        UpdateLife();
+
+        if(lifeCounter > 0)
+        {
+            Instantiate(particlePrefab, transform.position, transform.rotation);
+
+            canMove = false;
+            Color color = playerRenderer.color;
+            color = new Color(color.r, color.g, color.b, 0);
+            playerRenderer.color = color;
+            yield return new WaitForSeconds(1f);
+
+            transform.position = respawnPos;
+            color.a = 1f;
+            playerRenderer.color = color;
+            canMove = true;
+        }
+        else
+        {
+            StartCoroutine(GameOver_Death());
+        }
+        
+    }
+
     private IEnumerator GameOver_Death()
     {
         canMove = false;
+        GameManagerScript.gameOver = true;
         Color color = playerRenderer.color;
         color = new Color(color.r, color.g, color.b, 0);
         playerRenderer.color = color;
@@ -301,41 +322,6 @@ public class AH_PlayerController : MonoBehaviour
         GameManagerScript.GameOver();
     }
 
-    private IEnumerator Normal_Death()
-    {
-        Instantiate(particlePrefab, transform.position, transform.rotation);
-        lifeCounter--;
-        UpdateLife();
-
-        canMove = false;
-        Color color = playerRenderer.color;
-        color = new Color(color.r, color.g, color.b, 0);
-        playerRenderer.color = color;
-        yield return new WaitForSeconds(1f);
-
-
-        /*damage_PostProcess.profile.TryGet(out vg);
-        vg.intensity.value = 0f;
-
-        for (int i = 0; i < 5; i++)
-        {
-            vg.intensity.value += 0.1f;
-            yield return new WaitForSeconds(0.05f);
-        }
-
-        for (int i = 5; i > 0; i--)
-        {
-            vg.intensity.value -= 0.1f;
-            yield return new WaitForSeconds(0.05f);
-        }
-
-        vg.intensity.value = 0f;
-        */
-        transform.position = respawnPos;
-        color.a = 1f;
-
-    }
-
     private IEnumerator Temporal_Inmortal()
     {
         isInmortal = true;
@@ -344,5 +330,24 @@ public class AH_PlayerController : MonoBehaviour
     }
 
     //Falta sonido y post-procesado
+
+    /*damage_PostProcess.profile.TryGet(out vg);
+    vg.intensity.value = 0f;
+
+    for (int i = 0; i < 5; i++)
+    {
+        vg.intensity.value += 0.1f;
+        yield return new WaitForSeconds(0.05f);
+    }
+
+    for (int i = 5; i > 0; i--)
+    {
+        vg.intensity.value -= 0.1f;
+        yield return new WaitForSeconds(0.05f);
+    }
+
+    vg.intensity.value = 0f;
+    */
+
     //Ranking de score
 }

@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AH_TurtleAnim : MonoBehaviour
+public class AH_MysteryBox : MonoBehaviour
 {
-    public bool underWater;
-
-    private Animator turtleAnim;
+    private Animator mysteryBoxAnim;
     private AH_GameManager GameManagerScript;
 
     void Start()
     {
-        turtleAnim = GetComponent<Animator>();
+        mysteryBoxAnim = GetComponent<Animator>();
         GameManagerScript = FindObjectOfType<AH_GameManager>();
     }
 
@@ -19,7 +17,7 @@ public class AH_TurtleAnim : MonoBehaviour
     {
         if (GameManagerScript.gameOver)
         {
-            turtleAnim.enabled = false;
+            mysteryBoxAnim.enabled = false;
         }
     }
 }

@@ -16,6 +16,8 @@ public class AH_GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public int scoreCounter;
 
+    public bool gameOver;
+
     private AH_PlayerController playerControllerScript;
 
     void Start()

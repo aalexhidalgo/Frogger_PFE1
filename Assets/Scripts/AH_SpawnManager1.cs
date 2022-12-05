@@ -15,39 +15,44 @@ public class AH_SpawnManager1 : MonoBehaviour
     private float StartDelay = 0.1f;
     public float RepeatRate = 2f;
 
+    private AH_GameManager GameManagerScript;
 
     void Start ()
     {
+        GameManagerScript = FindObjectOfType<AH_GameManager>();
         InvokeRepeating("SpawnRandomPrefab", StartDelay, RepeatRate);
     }
 
     public void SpawnRandomPrefab()
     {
-        if (road == true) //Car prefabs
+        if(GameManagerScript.gameOver == false)
         {
-            int RandomIndex = Random.Range(0, RoadPrefabs.Length);
-            GameObject Prefabs = Instantiate(RoadPrefabs[RandomIndex], transform.position, RoadPrefabs[RandomIndex].transform.rotation);
-
-            if (right == true)
+            if (road == true) //Car prefabs
             {
-                Prefabs.transform.rotation = Quaternion.Euler(0, 0, 180);
-            }
-        }
-        else if(water == true)// Water prefabs
-        {
-            int RandomIndex = Random.Range(0, WaterPrefabs.Length);
-            GameObject Prefabs = Instantiate(WaterPrefabs[RandomIndex], transform.position, WaterPrefabs[RandomIndex].transform.rotation);
+                int RandomIndex = Random.Range(0, RoadPrefabs.Length);
+                GameObject Prefabs = Instantiate(RoadPrefabs[RandomIndex], transform.position, RoadPrefabs[RandomIndex].transform.rotation);
 
-            if (right == true)
-            {
-                Prefabs.transform.rotation = Quaternion.Euler(0, 0, 180);
+                if (right == true)
+                {
+                    Prefabs.transform.rotation = Quaternion.Euler(0, 0, 180);
+                }
             }
-        }
-        else if (ground == true)
-        {
-            GameObject Prefabs = Instantiate(GroundPrefab, transform.position, GroundPrefab.transform.rotation);
-            RightDirection(Prefabs);
-        }
+            else if (water == true)// Water prefabs
+            {
+                int RandomIndex = Random.Range(0, WaterPrefabs.Length);
+                GameObject Prefabs = Instantiate(WaterPrefabs[RandomIndex], transform.position, WaterPrefabs[RandomIndex].transform.rotation);
+
+                if (right == true)
+                {
+                    Prefabs.transform.rotation = Quaternion.Euler(0, 0, 180);
+                }
+            }
+            else if (ground == true)
+            {
+                GameObject Prefabs = Instantiate(GroundPrefab, transform.position, GroundPrefab.transform.rotation);
+                RightDirection(Prefabs);
+            }
+        }     
     }
 
     public void RightDirection(GameObject Prefabs)

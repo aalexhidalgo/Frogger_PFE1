@@ -10,6 +10,10 @@ public class AH_MenuManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
 
+    public Image skinImage;
+    public Sprite[] skinArray;
+    public int skinSelected;
+
     public void StartButton()
     {
         SceneManager.LoadScene("Game");
@@ -32,5 +36,30 @@ public class AH_MenuManager : MonoBehaviour
             scoreText.text = (PlayerPrefs.GetInt("Score")).ToString();
             timeText.text = string.Format("{0:00}:{1:00}:{2:000}", (PlayerPrefs.GetFloat("Minutes")), (PlayerPrefs.GetFloat("Seconds")), (PlayerPrefs.GetFloat("Miliseconds")));
         }
+    }
+
+    public void Skin_Selection(string direction)
+    {
+        if (direction == "right")
+        {
+            skinSelected++;
+
+            if (skinSelected >= skinArray.Length)
+            {
+                skinSelected = 0;
+            }
+        }
+
+        if (direction == "left")
+        {
+            skinSelected--;
+
+            if (skinSelected < 0)
+            {
+                skinSelected = 2;
+            }
+        }
+
+        skinImage.sprite = skinArray[skinSelected];
     }
 }

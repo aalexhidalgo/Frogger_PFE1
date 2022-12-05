@@ -8,25 +8,31 @@ public class AH_EnemyController : MonoBehaviour
     public float speed;
     private Vector2 direction = Vector2.right;
 
+    private Animator enemyAnim;
+    private AH_GameManager GameManagerScript;
+
     void Start()
     {
-
+        enemyAnim = GetComponent<Animator>();
+        GameManagerScript = FindObjectOfType<AH_GameManager>();
     }
 
     void Update()
     {
-        //This affects to all the enemies and interactuable props that have to travel in x axis
-        transform.Translate(direction * speed * Time.deltaTime);
+        //This affects to all the enemies and interactuable props that have to travel through x axis
 
         if(transform.position.x > spaceLimit || transform.position.x < -spaceLimit)
         {
             Destroy(gameObject);
         }
-    }
 
-    //A medida que pase el tiempo incrementamos la velocidad de los coches
-    public void IncreaseSpeed(float time) //Por hacer
-    {
-        speed += 1;
+        if (GameManagerScript.gameOver == false)
+        {
+            transform.Translate(direction * speed * Time.deltaTime);
+        }
+        else
+        {
+            enemyAnim.enabled = false;
+        }        
     }
 }
