@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class AH_PlayerController : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class AH_PlayerController : MonoBehaviour
     private Vector2 nextPos, respawnPos, maxPos;
     private Vector2 InitialPos = new Vector2(0f, -5.5f);
 
-    private bool isJumping, isInvincible;
+    private bool isJumping, isInmortal;
 
     private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
@@ -22,10 +24,13 @@ public class AH_PlayerController : MonoBehaviour
 
     private int stepScore = 5;
 
-    public bool isOnPlatform, isOnWater;
-    public bool cooldown, attack;
+    private bool isOnPlatform, isOnWater;
+    private bool cooldown, attack;
 
     public GameObject bombDeathPrefab;
+    public GameObject particlePrefab;
+    public Volume damage_PostProcess;
+    private Vignette vg;
 
     private AH_GameManager GameManagerScript;
     private AH_TurtleAnim TurtleAnimScript;
@@ -100,7 +105,7 @@ public class AH_PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         playerAnimator.SetBool("IsJumping", isJumping);
-        playerAnimator.SetBool("IsInvincible", isInvincible);
+        playerAnimator.SetBool("IsInmortal", isInmortal);
     }
 
     //Animation transition betweens steps
@@ -118,21 +123,16 @@ public class AH_PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             maxPos = transform.position;
-            lifeCounter--;
-            UpdateLife();
-            transform.position = respawnPos;
 
-            if (lifeCounter < 0)
+            if(isInmortal == false && lifeCounter > 0)
             {
-                lifeCounter = 0;
-                StartCoroutine(GameOver_Death());
+                StartCoroutine("Normal_Death");
+                vg.intensity.value = 0;             
             }
-
-            //Blink effect o otro (partículas)
-            //Meter corrutina menos a la hora de valer 0
 
             if (lifeCounter <= 0)
             {
+                transform.position = nextPos;
                 lifeCounter = 0;
                 StartCoroutine(GameOver_Death());
             }
@@ -154,7 +154,7 @@ public class AH_PlayerController : MonoBehaviour
         {
             attack = true;
 
-            if (TurtleAnimScript.underWater == true)
+            if (TurtleAnimScript.underWater == true && isInmortal)
             {
                 Debug.Log("Hola");
                 cooldown = false;
@@ -191,7 +191,7 @@ public class AH_PlayerController : MonoBehaviour
             }
             else if (randIndx == 1)
             {
-                StartCoroutine(Temporal_Invincibility());
+                StartCoroutine(Temporal_Inmortal());
             }
             else if (randIndx == 2)
             {
@@ -240,7 +240,7 @@ public class AH_PlayerController : MonoBehaviour
                 {
                     lifeCounter = 0;
 
-                    if (isOnWater == true) //Por arreglar
+                    if (isOnWater == true) 
                     {
                         StartCoroutine(GameOver_Death()); //GAMEOVER instantly
                     }
@@ -251,17 +251,23 @@ public class AH_PlayerController : MonoBehaviour
 
     private IEnumerator LifeCooldown_Turtle()
     {
-        lifeCounter--;
-        cooldown = true;
-        yield return new WaitForSeconds(2f); //En este tiempo la tortuga no ataca
-        cooldown = false;
+        if(isInmortal == false)
+        {
+            lifeCounter--;
+            cooldown = true;
+            yield return new WaitForSeconds(2f); //En este tiempo la tortuga no ataca
+            cooldown = false;
+        }
     }
 
     private IEnumerator LifeCooldown_Water()
     {
-        lifeCounter--;
-        cooldown = true;
-        yield return new WaitForSeconds(0.01f);
+        if(isInmortal == false)
+        {
+            lifeCounter--;
+            cooldown = true;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -295,16 +301,46 @@ public class AH_PlayerController : MonoBehaviour
         GameManagerScript.GameOver();
     }
 
-    private void Normal_Death()
+    private IEnumerator Normal_Death()
     {
-        //particulas muerte normal, igual que con el enemigo de rpg 2d
+        Instantiate(particlePrefab, transform.position, transform.rotation);
+        lifeCounter--;
+        UpdateLife();
+
+        canMove = false;
+        Color color = playerRenderer.color;
+        color = new Color(color.r, color.g, color.b, 0);
+        playerRenderer.color = color;
+        yield return new WaitForSeconds(1f);
+
+
+        /*damage_PostProcess.profile.TryGet(out vg);
+        vg.intensity.value = 0f;
+
+        for (int i = 0; i < 5; i++)
+        {
+            vg.intensity.value += 0.1f;
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        for (int i = 5; i > 0; i--)
+        {
+            vg.intensity.value -= 0.1f;
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        vg.intensity.value = 0f;
+        */
+        transform.position = respawnPos;
+        color.a = 1f;
+
     }
 
-    private IEnumerator Temporal_Invincibility()
+    private IEnumerator Temporal_Inmortal()
     {
-        isInvincible = true;
+        isInmortal = true;
         yield return new WaitForSeconds(10f); //Invencibilidad de 10 segundos
-        isInvincible = false;
+        isInmortal = false;
     }
 
     //Falta sonido y post-procesado
