@@ -6,17 +6,20 @@ using UnityEngine.Rendering.Universal;
 
 public class AH_PlayerController : MonoBehaviour
 {
+    //Vector and Screen Space
     private float spaceLimits = 4f;
     private float distance = 1f; //Distance between steps
     private Vector2 nextPos, respawnPos, maxPos;
     private Vector2 InitialPos = new Vector2(0f, -5.5f);
 
+    //Boolean conditions for animations
     private bool isJumping, isInmortal;
 
     private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerRenderer;
 
+    //Boolean conditions for movement
     public bool active;
     private bool canMove = true;
 
@@ -24,23 +27,26 @@ public class AH_PlayerController : MonoBehaviour
 
     private int stepScore = 5;
 
-    public bool isOnPlatform, isOnWater, isOnTurtle;
+    //Boolean conditions for trigger system
+    private bool isOnPlatform, isOnWater, isOnTurtle;
     private bool cooldown, attack;
 
-    public GameObject bombDeathPrefab, particlePrefab, waterParticlePrefab; //ParticleSystem
+    //ParticleSystem and Post-Processing
+    public GameObject bombDeathPrefab, particlePrefab, waterParticlePrefab; 
     public GameObject mysteryBoxparticle;
     public Volume damage_PostProcess;
     private Vignette vg;
 
-    public GameObject canvasNumber;
+    //UI
+    public GameObject canvasNumber, canvasHeart; 
 
+    //Audio
     public AudioClip[] soundEffects;
     private AudioSource gameManagerAudioSource;
 
+    //Scripts
     private AH_GameManager GameManagerScript;
     private AH_TurtleAnim TurtleAnimScript;
-
-    private int randIndx;
 
     void Awake()
     {
@@ -56,58 +62,52 @@ public class AH_PlayerController : MonoBehaviour
         transform.position = InitialPos;
         maxPos = transform.position;
     }
-
+    #region Player Movement
     void Update()
     {
-        //Player Movement
-
-        if (isJumping == false && canMove) //As a cooldown, we cannot press a key if we didn't arive to the new position
+        //Directions: Up, left and right
+        if (isJumping == false && canMove) //As a cooldown, we cannot press a key again if we didn't arive to the new position
         {
             if (Input.GetAxisRaw("Vertical") > 0)
             {
                 StartCoroutine(Movement());
-                nextPos = new Vector2(transform.position.x, transform.position.y + distance);
+                nextPos = new Vector2(transform.position.x, transform.position.y + distance); //Each step will be +0.5 (*)
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                //gameManagerAudioSource.PlayOneShot(soundEffects[0]);
+                gameManagerAudioSource.PlayOneShot(soundEffects[0]); //Jump effect (**)
 
-                if (maxPos.y < nextPos.y)
+                if (nextPos.y > maxPos.y) //The score will increase 5 points each step as long as we reach the prevoius maxPos.y 
                 {
                     GameManagerScript.UpdateScore(stepScore);
                 }
             }
 
-            if (Input.GetAxisRaw("Vertical") < 0 && transform.position.y != -spaceLimits) //Temporal, no ha de ir hacia atrás
-            {
-                StartCoroutine(Movement());
-                nextPos = new Vector2(transform.position.x, transform.position.y - distance);
-                transform.position = nextPos;
-                transform.rotation = Quaternion.Euler(0, 0, -180);
-            }
-
             if (Input.GetAxisRaw("Horizontal") > 0 && transform.position.x != spaceLimits)
             {
                 StartCoroutine(Movement());
-                nextPos = new Vector2(transform.position.x + distance, transform.position.y);
+                nextPos = new Vector2(transform.position.x + distance, transform.position.y); //(*)
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, -90);
+                gameManagerAudioSource.PlayOneShot(soundEffects[0]); //(**)
             }
 
             if (Input.GetAxisRaw("Horizontal") < 0 && transform.position.x != -spaceLimits)
             {
                 StartCoroutine(Movement());
-                nextPos = new Vector2(transform.position.x - distance, transform.position.y);
+                nextPos = new Vector2(transform.position.x - distance, transform.position.y); //(*)
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, 90);
+                gameManagerAudioSource.PlayOneShot(soundEffects[0]);//(**)
             }
         }
 
-        if (transform.position.x > spaceLimits || transform.position.x < -spaceLimits) //In case we have been on a tree and we touch a limit
+        if (transform.position.x > spaceLimits || transform.position.x < -spaceLimits) //In case we have been on a platform (tree, turtle or cocodrile) and we touch a limit
         {
             GameManagerScript.GameOver();
         }
     }
 
+    //Animations
     private void LateUpdate()
     {
         playerAnimator.SetBool("IsJumping", isJumping);
@@ -123,39 +123,39 @@ public class AH_PlayerController : MonoBehaviour
         isJumping = false;
     }
 
+    #endregion
+
     #region Trigger System
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            maxPos = transform.position;
-
-            if(isInmortal == false)
-            {
-                StartCoroutine(Death(particlePrefab));             
-            }
+            maxPos = transform.position; //It saves the last max position
+            StartCoroutine(Death(particlePrefab, 2));             
         }
 
-        if (other.gameObject.CompareTag("Water")) //GAMEOVER instantly
+        if (other.gameObject.CompareTag("Water"))
         {
+            maxPos = transform.position; //It saves the last max position
             isOnWater = true;
             cooldown = false;
         }
 
-        if (other.gameObject.CompareTag("Platform")) //In Tree Platform
+        if (other.gameObject.CompareTag("Platform")) //For tree and crocodile
         {
             isOnPlatform = true;
             transform.parent = other.transform;
         }
 
-        if (other.gameObject.CompareTag("Turtle"))
+        if (other.gameObject.CompareTag("Turtle")) //Exclusive tag for the turtle because it took me so long to make it work that I didn't want more problems :s
         {
+            maxPos = transform.position;
             TurtleAnimScript = FindObjectOfType<AH_TurtleAnim>();
             isOnTurtle = true;
             transform.parent = other.transform;
             attack = true;
 
-            if (TurtleAnimScript.underWater == true)
+            if (TurtleAnimScript.underWater == true) //ONLY if it's underwater the turtle attacks (one single hit)
             {
                 cooldown = false;
             }
@@ -166,39 +166,45 @@ public class AH_PlayerController : MonoBehaviour
             respawnPos = transform.position;
         }
 
-        if (other.gameObject.CompareTag("MysteryBox"))
+        if (other.gameObject.CompareTag("MysteryBox")) //A little bonus to make the game more enjoyable
         {
-            randIndx = Random.Range(0, 3);
+            int randIndx = Random.Range(0, 3);
             Destroy(other.gameObject);
             Instantiate(mysteryBoxparticle, transform.position, transform.rotation);
 
-            if (randIndx == 0)
+            if (randIndx == 0) //The first option allow us to regain a heart
             {
+                gameManagerAudioSource.PlayOneShot(soundEffects[1]);
                 lifeCounter++;
                 UpdateLife();
+                GameObject canvasLife = Instantiate(canvasHeart, transform.position, Quaternion.identity); //UI feedback to make it more dynamic (***)
 
-                if (lifeCounter >= 3)
+                if (lifeCounter > 3) //If this option appears but we already have 3 heart, 100 points will be add to the score counter
                 {
                     lifeCounter = 3;
-                    GameObject canvas = Instantiate(canvasNumber, transform.position, Quaternion.identity);
+                    GameObject canvas = Instantiate(canvasNumber, transform.position, Quaternion.identity); //(***)
                     canvas.GetComponent<AH_UINumber>().score = 100;
                     GameManagerScript.UpdateScore(100);
                 }
             }
-            else if (randIndx == 1)
+            else if (randIndx == 1)//The second option allow us to be inmortal through 10 seconds
             {
+                gameManagerAudioSource.Stop();
+                gameManagerAudioSource.PlayOneShot(soundEffects[5]);
+                gameManagerAudioSource.Play();
                 StartCoroutine(Temporal_Inmortal());
             }
-            else if (randIndx == 2)
+            else if (randIndx == 2)//The third and last option adds 250 points to the score counter
             {
-                GameObject canvas = Instantiate(canvasNumber, transform.position, Quaternion.identity);
+                gameManagerAudioSource.PlayOneShot(soundEffects[1]);
+                GameObject canvas = Instantiate(canvasNumber, transform.position, Quaternion.identity); //(***)
                 canvas.GetComponent<AH_UINumber>().score = 250;
                 GameManagerScript.UpdateScore(250);
             }
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other) //Allow the turtle and water to make us damage
     {
         if (other.gameObject.CompareTag("Turtle"))
         {
@@ -208,7 +214,7 @@ public class AH_PlayerController : MonoBehaviour
                 {
                     transform.parent = null;
                     StartCoroutine(Cooldown_Turtle());
-                    StartCoroutine(Death(particlePrefab));
+                    StartCoroutine(Death(particlePrefab, 2));
                 }
             }
         }
@@ -220,7 +226,7 @@ public class AH_PlayerController : MonoBehaviour
                 if (cooldown == false)
                 {
                     StartCoroutine(Cooldown_Water());
-                    StartCoroutine(Death(waterParticlePrefab));
+                    StartCoroutine(Death(waterParticlePrefab, 4));
                 }
             }
         }
@@ -262,20 +268,21 @@ public class AH_PlayerController : MonoBehaviour
     #endregion
 
     #region Life System
-    private void UpdateLife()
+    private void UpdateLife() //To update the UI life image with the actual life in the counter
     {
         GameManagerScript.lifeImage.sprite = GameManagerScript.lifeSpriteArray[lifeCounter];
     }
 
-    private IEnumerator Death(GameObject Particle)
+    private IEnumerator Death(GameObject Particle, int Sound) //Two types of death
     {
         if(isInmortal == false)
         {
             lifeCounter--;
             UpdateLife();
 
-            if (lifeCounter > 0)
+            if (lifeCounter > 0) //In the first one, we make appear a hit effect and the player is send back to the closest respawn position
             {
+                gameManagerAudioSource.PlayOneShot(soundEffects[Sound]);
                 Instantiate(Particle, transform.position, transform.rotation);
 
                 canMove = false;
@@ -289,8 +296,9 @@ public class AH_PlayerController : MonoBehaviour
                 playerRenderer.color = color;
                 canMove = true;
             }
-            else
+            else //In the seconds one, when we have the last heart, we make appear a red vignette effect (see the rest below)
             {
+                gameManagerAudioSource.PlayOneShot(soundEffects[3]);
                 damage_PostProcess.profile.TryGet(out vg);
                 vg.intensity.value = 0f;
 
@@ -305,7 +313,7 @@ public class AH_PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator GameOver_Death()
+    private IEnumerator GameOver_Death() //A bomb appears, the player disappears and after, we travel to the gameOver scene
     {
         canMove = false;
         GameManagerScript.gameOver = true;
@@ -319,15 +327,12 @@ public class AH_PlayerController : MonoBehaviour
         GameManagerScript.GameOver();
     }
 
-    private IEnumerator Temporal_Inmortal()
+    private IEnumerator Temporal_Inmortal() //The Player is inmortal through 10 seconds
     {
         isInmortal = true;
-        yield return new WaitForSeconds(10f); //Invencibilidad de 10 segundos
+        yield return new WaitForSeconds(10f);
         isInmortal = false;
     }
 
     #endregion
-
-    //Falta sonido
-    //Ranking de score
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AH_EnemyController : MonoBehaviour
 {
+    public bool noAnim; //For the objects that don't have animator (car, tree, empty parent of turtle)s
     private float spaceLimit = 10f;
     public float speed;
-    private Vector2 direction = Vector2.right;
 
     private Animator enemyAnim;
     private AH_GameManager GameManagerScript;
@@ -19,20 +19,20 @@ public class AH_EnemyController : MonoBehaviour
 
     void Update()
     {
-        //This affects to all the enemies and interactuable props that have to travel through x axis
+        //This script affects to all the enemies and interactuable props that have to travel through x axis
 
-        if(transform.position.x > spaceLimit || transform.position.x < -spaceLimit)
+        if (transform.position.x > spaceLimit || transform.position.x < -spaceLimit) //Space Limits
         {
             Destroy(gameObject);
         }
 
-        if (GameManagerScript.gameOver == false)
+        if (GameManagerScript.gameOver == false) //Movement
         {
-            transform.Translate(direction * speed * Time.deltaTime);
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
         }
-        /*else
+        else if(GameManagerScript.gameOver == true && noAnim == false) //If we lose the game pauses until we travel to the gameOver scene
         {
             enemyAnim.enabled = false;
-        }*/        
+        }        
     }
 }

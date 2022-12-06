@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class AH_MenuManager : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI timeText;
-
+    public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI titleDescriptionText;
+    public string[] descriptionArray;
+    public string[] titleDescriptionArray;
     public Image skinImage;
     public Sprite[] skinArray;
     public int skinSelected;
@@ -27,19 +28,10 @@ public class AH_MenuManager : MonoBehaviour
 
     void Start()
     {
-        Load_Time_Score();
+        Load_Data();
     }
 
-    private void Load_Time_Score() //Load score in the stats panel
-    {
-        if (PlayerPrefs.HasKey("Score"))
-        {
-            scoreText.text = (PlayerPrefs.GetInt("Score")).ToString();
-            timeText.text = string.Format("{0:00}:{1:00}:{2:000}", (PlayerPrefs.GetFloat("Minutes")), (PlayerPrefs.GetFloat("Seconds")), (PlayerPrefs.GetFloat("Miliseconds")));
-        }
-    }
-
-    public void Skin_Selection(string direction)
+    public void Skin_Selection(string direction) //To change the skin of our character, it also shows a short description of every one of them
     {
         if (direction == "right")
         {
@@ -62,6 +54,20 @@ public class AH_MenuManager : MonoBehaviour
         }
 
         skinImage.sprite = skinArray[skinSelected];
+        descriptionText.text = descriptionArray[skinSelected];
+        titleDescriptionText.text = titleDescriptionArray[skinSelected];
         AH_DataPersistance.PlayerStats.skinSelected = skinSelected;
+    }
+
+    public void Load_Data() //To load the data saved in PlayerPrefs
+    {
+        if (PlayerPrefs.HasKey("Skin_Selected"))
+        {
+            AH_DataPersistance.PlayerStats.highscore = PlayerPrefs.GetInt("High_Score");
+            AH_DataPersistance.PlayerStats.skinSelected = PlayerPrefs.GetInt("Skin_Selected");
+            skinImage.sprite = skinArray[AH_DataPersistance.PlayerStats.skinSelected];
+            descriptionText.text = descriptionArray[AH_DataPersistance.PlayerStats.skinSelected];
+            titleDescriptionText.text = titleDescriptionArray[AH_DataPersistance.PlayerStats.skinSelected];
+        }
     }
 }

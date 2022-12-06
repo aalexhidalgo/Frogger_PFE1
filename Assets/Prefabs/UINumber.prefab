@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760e6430a409d1243a33d36ac1b57bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 1.5
 --- !u!114 &4524894984447263529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,8 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973bff76b12973e4ba493b78dfd47582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSpeed: 1
-  scaleFactor: 5
+  canvasNumber: 1
   score: 0
   scoreText: {fileID: 6254015107564497710}
 --- !u!1 &5920905359114731681

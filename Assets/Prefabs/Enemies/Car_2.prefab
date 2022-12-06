@@ -71,6 +71,14 @@ PrefabInstance:
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4034313742040400531, guid: 88898bd081ddde94aaa847a16163dfc7, type: 3}
+      propertyPath: noAnim
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4034313742040400531, guid: 88898bd081ddde94aaa847a16163dfc7, type: 3}
+      propertyPath: carType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4034313742040400540, guid: 88898bd081ddde94aaa847a16163dfc7, type: 3}
       propertyPath: m_Name
       value: Car_2

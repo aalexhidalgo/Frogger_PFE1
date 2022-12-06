@@ -196,7 +196,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnManager (5)
   m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -238,7 +238,7 @@ MonoBehaviour:
   WaterPrefabs: []
   GroundPrefab: {fileID: 0}
   MysteryBox: {fileID: 728403582625246297, guid: b787a02dbc2cac3478dfd766b6eabaaa, type: 3}
-  RepeatRate: 20
+  RepeatRate: 10
 --- !u!1 &3476417675127105676
 GameObject:
   m_ObjectHideFlags: 0

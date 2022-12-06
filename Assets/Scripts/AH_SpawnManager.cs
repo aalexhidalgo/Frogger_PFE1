@@ -8,10 +8,12 @@ public class AH_SpawnManager : MonoBehaviour
     public bool left, right;
     public GameObject[] RoadPrefabs, WaterPrefabs; //Road (5 cars), Water (tree blocks, crocodile, radioactive crocodile, turtles, seal)
     public GameObject GroundPrefab, MysteryBox; //Snake and MysteryBox
+
     //Timers
     private float StartDelay = 0.1f;
     public float RepeatRate = 2f;
 
+    //Script
     private AH_GameManager GameManagerScript;
 
     void Start ()
@@ -39,22 +41,21 @@ public class AH_SpawnManager : MonoBehaviour
                 Prefabs.transform.SetParent(this.transform, true);
                 InvertScale(Prefabs);
 
-                if(radioactiveCrocodile == true)
+                if(radioactiveCrocodile == true) //Radioactive Crocodile
                 {
                     GameObject RadioactiveCrocodilePrefab = Instantiate(WaterPrefabs[0], transform.position, transform.rotation);
                     RadioactiveCrocodilePrefab.transform.SetParent(this.transform, true);
                     InvertScale(RadioactiveCrocodilePrefab);
                 }
             }
-            else if (ground == true)
+            else if (ground == true) //Snake
             {
                 GameObject Prefabs = Instantiate(GroundPrefab, transform.position, GroundPrefab.transform.rotation);
                 Prefabs.transform.SetParent(this.transform, true);
                 InvertScale(Prefabs);
             }
-            else if (mysteryBox == true)
+            else if (mysteryBox == true) //Mystery Box
             {
-                //Mystery Box
                 int randomIndx = Random.Range(-4, 4);
                 Vector3 randomPosX = new Vector3(randomIndx, transform.position.y);
                 GameObject PrefabBox = Instantiate(MysteryBox, randomPosX, transform.rotation);
@@ -63,7 +64,7 @@ public class AH_SpawnManager : MonoBehaviour
         }     
     }
 
-    public void RightDirection(GameObject Prefabs)
+    public void RightDirection(GameObject Prefabs) //To change the movement direction
     {
         if (right == true)
         {
@@ -71,7 +72,7 @@ public class AH_SpawnManager : MonoBehaviour
         }
     }
 
-    public void InvertScale(GameObject Prefabs)
+    public void InvertScale(GameObject Prefabs) //To change the sprite direction
     {
         if (right == true)
         {

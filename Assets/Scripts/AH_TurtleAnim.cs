@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AH_TurtleAnim : MonoBehaviour
 {
-    public bool underWater;
+    public bool underWater; //Animated bool
 
     private Animator turtleAnim;
     private AH_GameManager GameManagerScript;
@@ -17,7 +17,7 @@ public class AH_TurtleAnim : MonoBehaviour
 
     void Update()
     {
-        if (GameManagerScript.gameOver == true)
+        if (GameManagerScript.gameOver == true) //If we lose the game pauses until we travel to the gameOver scene
         {
             turtleAnim.enabled = false;
         }

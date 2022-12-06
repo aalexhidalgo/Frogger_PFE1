@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5759113126554647946
 Transform:
   m_ObjectHideFlags: 0
@@ -122,12 +122,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   lifeCounter: 3
+  isOnPlatform: 0
+  isOnWater: 0
+  isOnTurtle: 0
   bombDeathPrefab: {fileID: 1627051386201020091, guid: 493d6a304405d954d83de4f4766e9552, type: 3}
   particlePrefab: {fileID: 5489897523708966395, guid: fdd3a9fb55e362f4384ae1d33f30b5b2, type: 3}
   waterParticlePrefab: {fileID: 5489897523708966395, guid: 87b8e16902dd30143bc70d7b806f5e3b, type: 3}
   mysteryBoxparticle: {fileID: 5489897523708966395, guid: fca39e0262c35834aa7b5e8d5f92a0b3, type: 3}
   damage_PostProcess: {fileID: 0}
   canvasNumber: {fileID: 1347695555734777425, guid: 5f4d36f0885742942b5e0875c8fe9ed7, type: 3}
+  canvasHeart: {fileID: 2998011540761911745, guid: 6bf40566a346e0446886dfbf5d1b5de4, type: 3}
+  soundEffects:
+  - {fileID: 8300000, guid: 0702bfd543e5c394e87065fb01e63767, type: 3}
+  - {fileID: 8300000, guid: a72fd96b044ff4547974f7dce9a10243, type: 3}
+  - {fileID: 8300000, guid: 9ae739a85a76ff940a1e931d1b32c8fb, type: 3}
+  - {fileID: 8300000, guid: bfb0da7384e6f5c4aba9945436f5aeb4, type: 3}
+  - {fileID: 8300000, guid: 621e7ed198573c54f912808619ba4f0d, type: 3}
+  - {fileID: 8300000, guid: 06dbec1ec5d76c745918563242179dcd, type: 3}
 --- !u!61 &833290583784892831
 BoxCollider2D:
   m_ObjectHideFlags: 0

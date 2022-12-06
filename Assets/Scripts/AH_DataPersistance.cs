@@ -9,12 +9,13 @@ public class AH_DataPersistance : MonoBehaviour
 
     //Variables
     public int score;
+    public int highscore = 0;
 
     public float minutes;
     public float seconds;
     public float miliseconds;
 
-    public int skinSelected;
+    public int skinSelected = 0;
 
     void Awake()
     {
@@ -36,6 +37,7 @@ public class AH_DataPersistance : MonoBehaviour
     public void SaveForFutureGames()
     {
         PlayerPrefs.SetInt("Score", score);
+        PlayerPrefs.SetInt("High_Score", highscore);
 
         PlayerPrefs.SetFloat("Minutes", minutes);
         PlayerPrefs.SetFloat("Seconds", seconds);

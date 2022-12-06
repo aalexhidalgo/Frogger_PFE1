@@ -21,20 +21,20 @@ public class AH_MysteryBox : MonoBehaviour
     {
         if (GameManagerScript.gameOver)
         {
-            mysteryBoxAnim.enabled = false;
+            mysteryBoxAnim.enabled = false; //If we lose the game pauses until we travel to the gameOver scene
         }
 
-        if(start == true)
+        if(start == true) //Is called once
         {
             StartCoroutine("Destroy");
         }
     }
 
-    private IEnumerator Destroy()
+    private IEnumerator Destroy() //Particles will appear before it destroys itself   
     {
         start = false;
         yield return new WaitForSeconds(lifeTime);
-        Instantiate(mysteryBoxparticle, transform.position, transform.rotation);       
+        Instantiate(mysteryBoxparticle, transform.position, transform.rotation);   
         Destroy(gameObject);
     }
 

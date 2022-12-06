@@ -8,6 +8,7 @@ using TMPro;
 public class AH_GameOverManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI timeText;
     #region Buttons
     public void RestartButton()
@@ -25,11 +26,12 @@ public class AH_GameOverManager : MonoBehaviour
         Load_Score_Time();
     }
 
-    public void Load_Score_Time()
+    public void Load_Score_Time() //It shows the game results
     {
         if(PlayerPrefs.HasKey("Score"))
         {
             scoreText.text = (PlayerPrefs.GetInt("Score")).ToString();
+            highScoreText.text = (PlayerPrefs.GetInt("High_Score")).ToString();
             timeText.text = string.Format("{0:00}:{1:00}:{2:000}", (PlayerPrefs.GetFloat("Minutes")), (PlayerPrefs.GetFloat("Seconds")), (PlayerPrefs.GetFloat("Miliseconds")));
         }
     }

@@ -18,8 +18,8 @@ public class AH_MapBlock : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            MapGeneratorScript.AddMapBlock();
-            MapGeneratorScript.RemoveBlock();
+            MapGeneratorScript.AddMapBlock(); //To add a block
+            MapGeneratorScript.RemoveBlock(); //To remove the previous ones
         }
     }
 }
