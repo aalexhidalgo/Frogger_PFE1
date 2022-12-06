@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AH_SpawnManager : MonoBehaviour
 {
-    public bool road, water, ground, mysteryBox;
+    public bool road, water, ground, mysteryBox, radioactiveCrocodile;
     public bool left, right;
-    public GameObject[] RoadPrefabs, WaterPrefabs; //Road (5 cars), Water (tree blocks, crocodile, turtles, seal)
+    public GameObject[] RoadPrefabs, WaterPrefabs; //Road (5 cars), Water (tree blocks, crocodile, radioactive crocodile, turtles, seal)
     public GameObject GroundPrefab, MysteryBox; //Snake and MysteryBox
     //Timers
     private float StartDelay = 0.1f;
@@ -35,15 +35,22 @@ public class AH_SpawnManager : MonoBehaviour
             else if (water == true)// Water prefabs
             {
                 int RandomIndex = Random.Range(0, WaterPrefabs.Length);
-                GameObject Prefabs = Instantiate(WaterPrefabs[RandomIndex], transform.position, WaterPrefabs[RandomIndex].transform.rotation);
+                GameObject Prefabs = Instantiate(WaterPrefabs[RandomIndex], transform.position, transform.rotation);
                 Prefabs.transform.SetParent(this.transform, true);
-                RightDirection(Prefabs);
+                InvertScale(Prefabs);
+
+                if(radioactiveCrocodile == true)
+                {
+                    GameObject RadioactiveCrocodilePrefab = Instantiate(WaterPrefabs[0], transform.position, transform.rotation);
+                    RadioactiveCrocodilePrefab.transform.SetParent(this.transform, true);
+                    InvertScale(RadioactiveCrocodilePrefab);
+                }
             }
             else if (ground == true)
             {
                 GameObject Prefabs = Instantiate(GroundPrefab, transform.position, GroundPrefab.transform.rotation);
                 Prefabs.transform.SetParent(this.transform, true);
-                RightDirection(Prefabs);
+                InvertScale(Prefabs);
             }
             else if (mysteryBox == true)
             {
@@ -61,6 +68,15 @@ public class AH_SpawnManager : MonoBehaviour
         if (right == true)
         {
             Prefabs.transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
+    }
+
+    public void InvertScale(GameObject Prefabs)
+    {
+        if (right == true)
+        {
+            Prefabs.transform.rotation = Quaternion.Euler(0, 0, 180);
+            Prefabs.transform.localScale = new Vector3(1f, -1f, 1f);
         }
     }
 }

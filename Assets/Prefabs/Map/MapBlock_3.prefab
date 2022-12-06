@@ -1,5 +1,182 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &246329421631070150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 345751953227597219}
+  - component: {fileID: 769101464989903113}
+  m_Layer: 0
+  m_Name: SpawnManager (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &345751953227597219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246329421631070150}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &769101464989903113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246329421631070150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 1
+  right: 0
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 5177718972990749249, guid: 9667e0904cb3e264496e7622009599c7, type: 3}
+  - {fileID: 6064287561659425350, guid: 33395e02c93031d4db64434200043981, type: 3}
+  - {fileID: 3246324069694611742, guid: a3fcb1fa1ba8c5b4496e8fd9f066bf88, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
+--- !u!1 &1726457600808993906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6708072954345595761}
+  - component: {fileID: 1766095854348952676}
+  m_Layer: 0
+  m_Name: SpawnManager (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6708072954345595761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726457600808993906}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6, y: -3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1766095854348952676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726457600808993906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 0
+  right: 1
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 969383115692409508, guid: bb6175c09d0fc034fb0d8367639d7a0d, type: 3}
+  - {fileID: 3289709026307946781, guid: f19468cd4ccc17d4aba9faf535bba735, type: 3}
+  - {fileID: 969383115692409508, guid: bb6175c09d0fc034fb0d8367639d7a0d, type: 3}
+  - {fileID: 3289709026307946781, guid: f19468cd4ccc17d4aba9faf535bba735, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
+--- !u!1 &2408000158865493457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2838127587745532237}
+  - component: {fileID: 8081963557173154136}
+  m_Layer: 0
+  m_Name: SpawnManager (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2838127587745532237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408000158865493457}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8081963557173154136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408000158865493457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 1
+  right: 0
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 969383115692409508, guid: bb6175c09d0fc034fb0d8367639d7a0d, type: 3}
+  - {fileID: 3289709026307946781, guid: f19468cd4ccc17d4aba9faf535bba735, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
 --- !u!1 &2738341257397552525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,7 +1276,7 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1519,6 +1696,36 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -1, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 0, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 1, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 2, y: 5, z: 0}
     second:
       serializedVersion: 2
@@ -1649,8 +1856,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: f4d68bbbd0d18244f870e141f3a5fb75, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: 11400000, guid: f318d29e59b2a68448fb3a345ec30ce2, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 91971f39a6ba4d6449d7b97ad2914a05, type: 2}
   - m_RefCount: 4
@@ -1662,8 +1869,8 @@ Tilemap:
     m_Data: {fileID: -2065403502, guid: 8fca355a74d0ba648a231e1e0d38700a, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: -347176840, guid: 8fca355a74d0ba648a231e1e0d38700a, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 557055778, guid: 8fca355a74d0ba648a231e1e0d38700a, type: 3}
   - m_RefCount: 1
@@ -1671,7 +1878,7 @@ Tilemap:
   - m_RefCount: 4
     m_Data: {fileID: -2052401297, guid: 8fca355a74d0ba648a231e1e0d38700a, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 15
+  - m_RefCount: 18
     m_Data:
       e00: 1
       e01: 0
@@ -1708,7 +1915,7 @@ Tilemap:
       e32: 3.4e-44
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 15
+  - m_RefCount: 18
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -1892,6 +2099,182 @@ Transform:
   m_Father: {fileID: 8488348869096041211}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3776496964597480106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1927788024859405338}
+  - component: {fileID: 6168304253896421690}
+  m_Layer: 0
+  m_Name: SpawnManager (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1927788024859405338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3776496964597480106}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6, y: -4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6168304253896421690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3776496964597480106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 1
+  right: 0
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 5177718972990749249, guid: 9667e0904cb3e264496e7622009599c7, type: 3}
+  - {fileID: 6064287561659425350, guid: 33395e02c93031d4db64434200043981, type: 3}
+  - {fileID: 3246324069694611742, guid: a3fcb1fa1ba8c5b4496e8fd9f066bf88, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
+--- !u!1 &4712300258448429330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5068954198521171581}
+  - component: {fileID: 6573876487963412449}
+  m_Layer: 0
+  m_Name: SpawnManager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5068954198521171581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4712300258448429330}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6, y: -6.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6573876487963412449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4712300258448429330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 1
+  right: 0
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 5177718972990749249, guid: 9667e0904cb3e264496e7622009599c7, type: 3}
+  - {fileID: 6064287561659425350, guid: 33395e02c93031d4db64434200043981, type: 3}
+  - {fileID: 3246324069694611742, guid: a3fcb1fa1ba8c5b4496e8fd9f066bf88, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
+--- !u!1 &5154283196248602013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1046836876583755904}
+  - component: {fileID: 4393917513576651757}
+  m_Layer: 0
+  m_Name: SpawnManager (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1046836876583755904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154283196248602013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4393917513576651757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154283196248602013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 0
+  right: 1
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 1631792485001854939, guid: 81d19cce54816fe4e9bac392cbaf21be, type: 3}
+  - {fileID: 298326198616615527, guid: e5df6b4da045faa40895b00ae62b1319, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
 --- !u!1 &5738350725705904898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,6 +2333,105 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &6500664218210201056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2179456744907149306}
+  m_Layer: 0
+  m_Name: SpawnManager_GRP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2179456744907149306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500664218210201056}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5068954198521171581}
+  - {fileID: 7806280209662872857}
+  - {fileID: 1927788024859405338}
+  - {fileID: 6708072954345595761}
+  - {fileID: 2543107831247905460}
+  - {fileID: 3985254990494296361}
+  - {fileID: 1046836876583755904}
+  - {fileID: 2838127587745532237}
+  - {fileID: 345751953227597219}
+  - {fileID: 4326744703430708645}
+  m_Father: {fileID: 8488348869096041211}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7336518015046693748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3985254990494296361}
+  - component: {fileID: 7931083063649195939}
+  m_Layer: 0
+  m_Name: SpawnManager (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3985254990494296361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336518015046693748}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6, y: -1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7931083063649195939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336518015046693748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 1
+  right: 0
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 969383115692409508, guid: bb6175c09d0fc034fb0d8367639d7a0d, type: 3}
+  - {fileID: 6064287561659425350, guid: 33395e02c93031d4db64434200043981, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
 --- !u!1 &8488348869096041210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,7 +2442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8488348869096041211}
   - component: {fileID: 8488348869096041212}
-  - component: {fileID: 305656995396337104}
+  - component: {fileID: 1826593252353079942}
   m_Layer: 0
   m_Name: MapBlock_3
   m_TagString: Untagged
@@ -1984,6 +2466,7 @@ Transform:
   - {fileID: 2738341258662867678}
   - {fileID: 2738341259113165486}
   - {fileID: 6023568230974085064}
+  - {fileID: 2179456744907149306}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2001,7 +2484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 2738341258662867678}
   endPoint: {fileID: 2738341259113165486}
---- !u!61 &305656995396337104
+--- !u!61 &1826593252353079942
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2014,7 +2497,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 16}
+  m_Offset: {x: 0, y: 15.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2027,3 +2510,179 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &8710336916561454626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4326744703430708645}
+  - component: {fileID: 5472828744173958933}
+  m_Layer: 0
+  m_Name: SpawnManager (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4326744703430708645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710336916561454626}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5472828744173958933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710336916561454626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 0
+  right: 1
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 1631792485001854939, guid: 81d19cce54816fe4e9bac392cbaf21be, type: 3}
+  - {fileID: 3289709026307946781, guid: f19468cd4ccc17d4aba9faf535bba735, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
+--- !u!1 &8836547638435058952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2543107831247905460}
+  - component: {fileID: 5518993386251435761}
+  m_Layer: 0
+  m_Name: SpawnManager (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2543107831247905460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8836547638435058952}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5518993386251435761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8836547638435058952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 1
+  right: 0
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 5177718972990749249, guid: 9667e0904cb3e264496e7622009599c7, type: 3}
+  - {fileID: 298326198616615527, guid: e5df6b4da045faa40895b00ae62b1319, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2
+--- !u!1 &8959768234104660973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7806280209662872857}
+  - component: {fileID: 424238295705834849}
+  m_Layer: 0
+  m_Name: SpawnManager (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7806280209662872857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959768234104660973}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6, y: -5.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2179456744907149306}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &424238295705834849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959768234104660973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85cc7e7cc506944a8a28c516f12568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road: 0
+  water: 1
+  ground: 0
+  mysteryBox: 0
+  radioactiveCrocodile: 0
+  left: 0
+  right: 1
+  RoadPrefabs: []
+  WaterPrefabs:
+  - {fileID: 967606241376767502, guid: f40d446d29656bc44964251252cf5cf2, type: 3}
+  - {fileID: 6997383704157891758, guid: d0f7c411a02564d479df24485dae7f00, type: 3}
+  - {fileID: 969383115692409508, guid: bb6175c09d0fc034fb0d8367639d7a0d, type: 3}
+  - {fileID: 3289709026307946781, guid: f19468cd4ccc17d4aba9faf535bba735, type: 3}
+  GroundPrefab: {fileID: 0}
+  MysteryBox: {fileID: 0}
+  RepeatRate: 2

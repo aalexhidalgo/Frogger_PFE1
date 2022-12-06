@@ -30,9 +30,9 @@ public class AH_EnemyController : MonoBehaviour
         {
             transform.Translate(direction * speed * Time.deltaTime);
         }
-        else
+        /*else
         {
             enemyAnim.enabled = false;
-        }        
+        }*/        
     }
 }

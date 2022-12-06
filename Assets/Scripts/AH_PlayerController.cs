@@ -27,8 +27,7 @@ public class AH_PlayerController : MonoBehaviour
     private bool isOnPlatform, isOnWater;
     private bool cooldown, attack;
 
-    public GameObject bombDeathPrefab;
-    public GameObject particlePrefab;
+    public GameObject bombDeathPrefab, particlePrefab, waterParticlePrefab; //ParticleSystem
     public GameObject mysteryBoxparticle;
     public Volume damage_PostProcess;
     private Vignette vg;
@@ -120,7 +119,7 @@ public class AH_PlayerController : MonoBehaviour
         isJumping = false;
     }
 
-    //Trigger: Platforms
+    #region Trigger System
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -129,8 +128,7 @@ public class AH_PlayerController : MonoBehaviour
 
             if(isInmortal == false)
             {
-                StartCoroutine(Death());
-                //vg.intensity.value = 0;              
+                StartCoroutine(Death(particlePrefab));             
             }
         }
 
@@ -150,18 +148,17 @@ public class AH_PlayerController : MonoBehaviour
         {
             attack = true;
 
-            if (TurtleAnimScript.underWater == true && isInmortal)
+            if (TurtleAnimScript.underWater == true)
             {
                 Debug.Log("Hola");
                 cooldown = false;
-                lifeCounter--;
-                UpdateLife();
+                StartCoroutine(Death(particlePrefab));
 
-                if (lifeCounter <= 0)
+                /*if (lifeCounter <= 0)
                 {
                     lifeCounter = 0;
                     StartCoroutine(GameOver_Death()); //GAMEOVER instantly
-                }
+                }*/
             }
         }
 
@@ -204,25 +201,13 @@ public class AH_PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Turtle")) //Funciona :D (Hacer padre de las tortugitas)
+        if (other.gameObject.CompareTag("Turtle"))
         {
             if (TurtleAnimScript.underWater == true)
             {
                 if (cooldown == false)
                 {
-                    StartCoroutine(LifeCooldown_Turtle());
-                }
-
-                UpdateLife();
-
-                if (lifeCounter <= 0)
-                {
-                    lifeCounter = 0;
-
-                    if (attack == true)
-                    {
-                        StartCoroutine(GameOver_Death());
-                    }
+                    StartCoroutine(Cooldown_Turtle());
                 }
             }
         }
@@ -233,42 +218,10 @@ public class AH_PlayerController : MonoBehaviour
             {
                 if (cooldown == false)
                 {
-                    StartCoroutine(LifeCooldown_Water());
-                }
-
-                UpdateLife();
-
-                if (lifeCounter <= 0)
-                {
-                    lifeCounter = 0;
-
-                    if (isOnWater == true) 
-                    {
-                        StartCoroutine(GameOver_Death()); //GAMEOVER instantly
-                    }
+                    StartCoroutine(Cooldown_Water());
+                    StartCoroutine(Death(waterParticlePrefab));
                 }
             }
-        }
-    }
-
-    private IEnumerator LifeCooldown_Turtle()
-    {
-        if(isInmortal == false)
-        {
-            lifeCounter--;
-            cooldown = true;
-            yield return new WaitForSeconds(2f); //En este tiempo la tortuga no ataca
-            cooldown = false;
-        }
-    }
-
-    private IEnumerator LifeCooldown_Water()
-    {
-        if(isInmortal == false)
-        {
-            lifeCounter--;
-            cooldown = true;
-            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -284,44 +237,64 @@ public class AH_PlayerController : MonoBehaviour
             transform.parent = null;
         }
     }
+    #endregion
 
+    #region Cooldown System
+    private IEnumerator Cooldown_Turtle()
+    {
+        cooldown = true;
+        yield return new WaitForSeconds(2f);//En este tiempo la tortuga no ataca
+        cooldown = false;
+    }
+
+    private IEnumerator Cooldown_Water()
+    {
+        cooldown = true;
+        yield return new WaitForSeconds(0.01f);
+    }
+    #endregion
+
+    #region Life System
     private void UpdateLife()
     {
         GameManagerScript.lifeImage.sprite = GameManagerScript.lifeSpriteArray[lifeCounter];
     }
 
-    private IEnumerator Death()
+    private IEnumerator Death(GameObject Particle)
     {
-        lifeCounter--;
-        UpdateLife();
-
-        if (lifeCounter > 0)
+        if(isInmortal == false)
         {
-            Instantiate(particlePrefab, transform.position, transform.rotation);
+            lifeCounter--;
+            UpdateLife();
 
-            canMove = false;
-            Color color = playerRenderer.color;
-            color = new Color(color.r, color.g, color.b, 0);
-            playerRenderer.color = color;
-            yield return new WaitForSeconds(1f);
-
-            transform.position = respawnPos;
-            color.a = 1f;
-            playerRenderer.color = color;
-            canMove = true;
-        }
-        else
-        {
-            damage_PostProcess.profile.TryGet(out vg);
-            vg.intensity.value = 0f;
-
-            for (int i = 0; i < 3; i++)
+            if (lifeCounter > 0)
             {
-                vg.intensity.value += 0.1f;
-                yield return new WaitForSeconds(0.05f);
-            }
+                Instantiate(Particle, transform.position, transform.rotation);
 
-            StartCoroutine(GameOver_Death());
+                canMove = false;
+                Color color = playerRenderer.color;
+                color = new Color(color.r, color.g, color.b, 0);
+                playerRenderer.color = color;
+                yield return new WaitForSeconds(1f);
+
+                transform.position = respawnPos;
+                color.a = 1f;
+                playerRenderer.color = color;
+                canMove = true;
+            }
+            else
+            {
+                damage_PostProcess.profile.TryGet(out vg);
+                vg.intensity.value = 0f;
+
+                for (int i = 0; i < 3; i++)
+                {
+                    vg.intensity.value += 0.1f;
+                    yield return new WaitForSeconds(0.05f);
+                }
+
+                StartCoroutine(GameOver_Death());
+            }
         }
     }
 
@@ -346,8 +319,8 @@ public class AH_PlayerController : MonoBehaviour
         isInmortal = false;
     }
 
-    //Falta sonido y post-procesado
+    #endregion
 
-
+    //Falta sonido
     //Ranking de score
 }
