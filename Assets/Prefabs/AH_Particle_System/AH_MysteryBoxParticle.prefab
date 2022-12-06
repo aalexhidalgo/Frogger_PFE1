@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5489897523708966149}
   - component: {fileID: 5489897523708966394}
   m_Layer: 0
-  m_Name: WaterParticleSystem
+  m_Name: AH_MysteryBoxParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,7 +226,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 0.39664507, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.82739925, b: 1, a: 1}
+        key0: {r: 0, g: 0.5456042, b: 1, a: 1}
         key1: {r: 0.7783019, g: 0.96696264, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.75
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -661,7 +661,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 4
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -4761,7 +4761,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 397b495778fd18a4088ea54e8640316d, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

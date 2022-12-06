@@ -2030,7 +2030,7 @@ GameObject:
   - component: {fileID: 3713969886782882107}
   - component: {fileID: 3713969886782882106}
   m_Layer: 0
-  m_Name: MapBlock
+  m_Name: AH_MapBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

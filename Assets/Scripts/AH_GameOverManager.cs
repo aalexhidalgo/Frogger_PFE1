@@ -13,12 +13,12 @@ public class AH_GameOverManager : MonoBehaviour
     #region Buttons
     public void RestartButton()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("AH_Game");
     }
 
     public void ExitButton()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("AH_Main_Menu");
     }
     #endregion
     private void Start()

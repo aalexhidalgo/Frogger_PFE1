@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2401413432714906069}
   - component: {fileID: 8293565210717916437}
   m_Layer: 0
-  m_Name: Radioactive_Crocodile
+  m_Name: AH_Radioactive_Crocodile
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

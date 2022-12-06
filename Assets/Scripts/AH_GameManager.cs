@@ -81,7 +81,7 @@ public class AH_GameManager : MonoBehaviour
             }
         }
         AH_DataPersistance.PlayerStats.SaveForFutureGames(); //Before we die we save the values in data persistance
-        SceneManager.LoadScene("Game Over");
+        SceneManager.LoadScene("AH_Game_Over");
     }
 
     private void LoadSkin_HighScore() //To load the skin selected in the MainMenu scene

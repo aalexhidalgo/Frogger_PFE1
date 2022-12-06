@@ -18,7 +18,7 @@ public class AH_MenuManager : MonoBehaviour
     public void StartButton()
     {
         AH_DataPersistance.PlayerStats.SaveForFutureGames();
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("AH_Game");
     }
 
     public void ExitButton()

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5811455933368469545}
   - component: {fileID: 4524894984447263529}
   m_Layer: 5
-  m_Name: UINumber
+  m_Name: AH_UINumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
