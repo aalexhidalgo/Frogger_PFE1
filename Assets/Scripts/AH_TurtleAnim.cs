@@ -17,7 +17,7 @@ public class AH_TurtleAnim : MonoBehaviour
 
     void Update()
     {
-        if (GameManagerScript.gameOver)
+        if (GameManagerScript.gameOver == true)
         {
             turtleAnim.enabled = false;
         }

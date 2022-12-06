@@ -34,6 +34,9 @@ public class AH_PlayerController : MonoBehaviour
 
     public GameObject canvasNumber;
 
+    public AudioClip[] soundEffects;
+    private AudioSource gameManagerAudioSource;
+
     private AH_GameManager GameManagerScript;
     private AH_TurtleAnim TurtleAnimScript;
 
@@ -45,11 +48,11 @@ public class AH_PlayerController : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerRenderer = GetComponent<SpriteRenderer>();
         GameManagerScript = FindObjectOfType<AH_GameManager>();
-        TurtleAnimScript = FindObjectOfType<AH_TurtleAnim>();
     }
 
     void Start()
     {
+        gameManagerAudioSource = GameManagerScript.GetComponent<AudioSource>();
         transform.position = InitialPos;
         maxPos = transform.position;
     }
@@ -66,6 +69,7 @@ public class AH_PlayerController : MonoBehaviour
                 nextPos = new Vector2(transform.position.x, transform.position.y + distance);
                 transform.position = nextPos;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+                //gameManagerAudioSource.PlayOneShot(soundEffects[0]);
 
                 if (maxPos.y < nextPos.y)
                 {
@@ -146,6 +150,7 @@ public class AH_PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Turtle"))
         {
+            TurtleAnimScript = FindObjectOfType<AH_TurtleAnim>();
             isOnTurtle = true;
             transform.parent = other.transform;
             attack = true;
@@ -201,6 +206,7 @@ public class AH_PlayerController : MonoBehaviour
             {
                 if (cooldown == false)
                 {
+                    transform.parent = null;
                     StartCoroutine(Cooldown_Turtle());
                     StartCoroutine(Death(particlePrefab));
                 }

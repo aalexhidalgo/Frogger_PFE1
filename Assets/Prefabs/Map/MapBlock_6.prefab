@@ -375,8 +375,8 @@ MonoBehaviour:
   right: 1
   RoadPrefabs: []
   WaterPrefabs:
-  - {fileID: 2018217390413379941, guid: 2d5734040e8cc8c4fa1943f9b40fce17, type: 3}
-  - {fileID: 967606241376767502, guid: f40d446d29656bc44964251252cf5cf2, type: 3}
+  - {fileID: 862786584774549564, guid: 1bb5fca5a76cb1143a14605bc184c2d3, type: 3}
+  - {fileID: 2076877407965545254, guid: bc9aaf8dadb81914bbedec4d3dcf1c35, type: 3}
   - {fileID: 969383115692409508, guid: bb6175c09d0fc034fb0d8367639d7a0d, type: 3}
   - {fileID: 3289709026307946781, guid: f19468cd4ccc17d4aba9faf535bba735, type: 3}
   GroundPrefab: {fileID: 0}
@@ -2818,7 +2818,7 @@ MonoBehaviour:
   WaterPrefabs:
   - {fileID: 3289709026307946781, guid: f19468cd4ccc17d4aba9faf535bba735, type: 3}
   - {fileID: 969383115692409508, guid: bb6175c09d0fc034fb0d8367639d7a0d, type: 3}
-  - {fileID: 2018217390413379941, guid: 2d5734040e8cc8c4fa1943f9b40fce17, type: 3}
+  - {fileID: 179698817109003329, guid: 43327e36dbbe81d46bf158dbb3871255, type: 3}
   GroundPrefab: {fileID: 0}
   MysteryBox: {fileID: 0}
   RepeatRate: 2

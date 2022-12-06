@@ -187,6 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 108488835}
   - component: {fileID: 108488836}
+  - component: {fileID: 108488837}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -235,6 +236,102 @@ MonoBehaviour:
   - {fileID: 1288314756}
   - {fileID: 3485520371911324126}
   - {fileID: 4735763550880877563}
+--- !u!82 &108488837
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108488834}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 075084d6a66b4ae489a8a8ee79746b32, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &216031812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 179698817109003329, guid: 43327e36dbbe81d46bf158dbb3871255, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 179698817109003342, guid: 43327e36dbbe81d46bf158dbb3871255, type: 3}
       propertyPath: m_RootOrder
@@ -1486,7 +1583,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749583798}
-  m_LocalRotation: {x: -2.065079e-38, y: 4.130158e-38, z: 0, w: 1}
+  m_LocalRotation: {x: -2.0758768e-38, y: 4.1517536e-38, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4750,6 +4847,10 @@ PrefabInstance:
       propertyPath: damage_PostProcess
       value: 
       objectReference: {fileID: 9890592}
+    - target: {fileID: 6382441659010213664, guid: d4f593e4c9a93ca43b7fdc3f553e7192, type: 3}
+      propertyPath: soundEffects.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4f593e4c9a93ca43b7fdc3f553e7192, type: 3}
 --- !u!1 &4049142188670649856
@@ -4923,7 +5024,7 @@ GameObject:
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4049142189216982253
 Transform:
   m_ObjectHideFlags: 0
@@ -5312,6 +5413,8 @@ MonoBehaviour:
   RoadPrefabs: []
   WaterPrefabs:
   - {fileID: 179698817109003329, guid: 43327e36dbbe81d46bf158dbb3871255, type: 3}
+  - {fileID: 862786584774549564, guid: 1bb5fca5a76cb1143a14605bc184c2d3, type: 3}
+  - {fileID: 2076877407965545254, guid: bc9aaf8dadb81914bbedec4d3dcf1c35, type: 3}
   GroundPrefab: {fileID: 0}
   MysteryBox: {fileID: 0}
   RepeatRate: 2
