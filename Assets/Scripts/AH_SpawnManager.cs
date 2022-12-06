@@ -4,48 +4,63 @@ using UnityEngine;
 
 public class AH_SpawnManager : MonoBehaviour
 {
-    //Point of spawn (X)
-    private float xLimit = 6f;
-
-    public GameObject[] CarPrefabs;
-    public float[] CarYPos;
-
+    public bool road, water, ground, mysteryBox;
+    public bool left, right;
+    public GameObject[] RoadPrefabs, WaterPrefabs; //Road (5 cars), Water (tree blocks, crocodile, turtles, seal)
+    public GameObject GroundPrefab, MysteryBox; //Snake and MysteryBox
     //Timers
     private float StartDelay = 0.1f;
-    private float RepeatRate = 2f;
+    public float RepeatRate = 2f;
 
-    void Start()
+    private AH_GameManager GameManagerScript;
+
+    void Start ()
     {
-        InvokeRepeating("SpawnRandomCar", StartDelay, RepeatRate);
+        GameManagerScript = FindObjectOfType<AH_GameManager>();
+        InvokeRepeating("SpawnRandomPrefab", StartDelay, RepeatRate);
     }
 
-    public Vector3 RandomSpawnPosCar(int RandomSpawnPosX)
+    public void SpawnRandomPrefab()
     {
-        //Variable que guarda de forma Random su spawn en el límite superior o inferior
-        float RandomSpawnPosY = Random.Range(0, CarYPos.Length);
-        //float RandomSpawnPosX = Random.Range(-xLimit,)
-        //Le indicamos que si vale 3 o más aparezca en el límite izquierdo, mientras que si vale menos lo haga en el límite derecho
-        if (RandomSpawnPosX >= 3)
+        if(GameManagerScript.gameOver == false)
         {
-            return new Vector3(-xLimit, RandomSpawnPosY, 0);
-        }
-        else
-        {
-            return new Vector3(xLimit, RandomSpawnPosY, 0);
-        }
-
+            if (road == true) 
+            {
+                //Car prefabs
+                int RandomIndex = Random.Range(0, RoadPrefabs.Length);
+                GameObject Prefabs = Instantiate(RoadPrefabs[RandomIndex], transform.position, RoadPrefabs[RandomIndex].transform.rotation);
+                Prefabs.transform.SetParent(this.transform, true);
+                RightDirection(Prefabs);
+            }
+            else if (water == true)// Water prefabs
+            {
+                int RandomIndex = Random.Range(0, WaterPrefabs.Length);
+                GameObject Prefabs = Instantiate(WaterPrefabs[RandomIndex], transform.position, WaterPrefabs[RandomIndex].transform.rotation);
+                Prefabs.transform.SetParent(this.transform, true);
+                RightDirection(Prefabs);
+            }
+            else if (ground == true)
+            {
+                GameObject Prefabs = Instantiate(GroundPrefab, transform.position, GroundPrefab.transform.rotation);
+                Prefabs.transform.SetParent(this.transform, true);
+                RightDirection(Prefabs);
+            }
+            else if (mysteryBox == true)
+            {
+                //Mystery Box
+                int randomIndx = Random.Range(-4, 4);
+                Vector3 randomPosX = new Vector3(randomIndx, transform.position.y);
+                GameObject PrefabBox = Instantiate(MysteryBox, randomPosX, transform.rotation);
+                PrefabBox.transform.SetParent(this.transform, true);
+            }
+        }     
     }
 
-    public void SpawnRandomCar()
+    public void RightDirection(GameObject Prefabs)
     {
-        int RandomIndex = Random.Range(0, CarPrefabs.Length); //Random car prefab
-        int RandomSpawnPosX = Random.Range(0, 2); //Random spawn to the left or right
-        GameObject Prefabs = Instantiate(CarPrefabs[RandomIndex], RandomSpawnPosCar(RandomSpawnPosX), CarPrefabs[RandomIndex].transform.rotation); //Random instantiate (carprefab + position)
-
-        if (RandomSpawnPosX == 1)
+        if (right == true)
         {
             Prefabs.transform.rotation = Quaternion.Euler(0, 0, 180);
         }
     }
-
 }

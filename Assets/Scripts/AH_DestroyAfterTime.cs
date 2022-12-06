@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AH_DestroyAfterTime : MonoBehaviour
 {
-    private float lifeTime = 1.5f;
+    public float lifeTime = 1.5f;
 
     void Start()
     {

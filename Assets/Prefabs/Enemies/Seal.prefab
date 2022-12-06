@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1060030438240567538}
   - component: {fileID: 5062603799501500534}
   - component: {fileID: 1306140004078189583}
+  - component: {fileID: 4030365986901161238}
   m_Layer: 0
   m_Name: Seal
   m_TagString: Enemy
@@ -132,3 +133,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.6875}
   m_EdgeRadius: 0
+--- !u!114 &4030365986901161238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298326198616615527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c8668c1121c6c499bab63ce7cdbe05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2

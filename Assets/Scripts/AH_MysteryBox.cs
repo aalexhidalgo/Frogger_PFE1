@@ -6,6 +6,7 @@ public class AH_MysteryBox : MonoBehaviour
 {
     private float lifeTime = 10f;
     public GameObject mysteryBoxparticle;
+    private bool start = true;
 
     private Animator mysteryBoxAnim;
     private AH_GameManager GameManagerScript;
@@ -14,7 +15,6 @@ public class AH_MysteryBox : MonoBehaviour
     {
         mysteryBoxAnim = GetComponent<Animator>();
         GameManagerScript = FindObjectOfType<AH_GameManager>();
-        Destroy(gameObject, lifeTime);
     }
     
     void Update()
@@ -24,9 +24,19 @@ public class AH_MysteryBox : MonoBehaviour
             mysteryBoxAnim.enabled = false;
         }
 
-        if(lifeTime == 9f)
+        if(start == true)
         {
-            Instantiate(mysteryBoxparticle, transform.position, transform.rotation);
+            StartCoroutine("Destroy");
         }
     }
+
+    private IEnumerator Destroy()
+    {
+        start = false;
+        yield return new WaitForSeconds(lifeTime);
+        Instantiate(mysteryBoxparticle, transform.position, transform.rotation);       
+        Destroy(gameObject);
+    }
+
+
 }

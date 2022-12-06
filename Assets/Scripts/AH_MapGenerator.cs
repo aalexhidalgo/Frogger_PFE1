@@ -20,8 +20,8 @@ public class AH_MapGenerator : MonoBehaviour
         //Random map block instance
         int randomIndex = Random.Range(0, MapBlocks.Count);
         AH_MapBlock currentBlock = (AH_MapBlock)Instantiate(MapBlocks[randomIndex]);
+        currentBlock.transform.SetParent(this.transform, false);
 
-        //currentBlock.transform.SetParent(this.transform, false);
         Vector3 spawnPosition = Vector3.zero;
 
         if (currentBlocks.Count == 0) //First point of spawn of the map blocks
