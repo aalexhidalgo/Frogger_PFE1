@@ -29,13 +29,16 @@ public class AH_PlayerController : MonoBehaviour
 
     public GameObject bombDeathPrefab;
     public GameObject particlePrefab;
+    public GameObject mysteryBoxparticle;
     public Volume damage_PostProcess;
     private Vignette vg;
+
+    public GameObject canvasNumber;
 
     private AH_GameManager GameManagerScript;
     private AH_TurtleAnim TurtleAnimScript;
 
-    public int randIndx;
+    private int randIndx;
 
     void Awake()
     {
@@ -170,6 +173,8 @@ public class AH_PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("MysteryBox"))
         {
             randIndx = Random.Range(0, 3);
+            Destroy(other.gameObject);
+            Instantiate(mysteryBoxparticle, transform.position, transform.rotation);
 
             if (randIndx == 0)
             {
@@ -179,6 +184,8 @@ public class AH_PlayerController : MonoBehaviour
                 if (lifeCounter >= 3)
                 {
                     lifeCounter = 3;
+                    GameObject canvas = Instantiate(canvasNumber, transform.position, Quaternion.identity);
+                    canvas.GetComponent<AH_UINumber>().score = 100;
                     GameManagerScript.UpdateScore(100);
                 }
             }
@@ -188,6 +195,8 @@ public class AH_PlayerController : MonoBehaviour
             }
             else if (randIndx == 2)
             {
+                GameObject canvas = Instantiate(canvasNumber, transform.position, Quaternion.identity);
+                canvas.GetComponent<AH_UINumber>().score = 250;
                 GameManagerScript.UpdateScore(250);
             }
         }
@@ -286,7 +295,7 @@ public class AH_PlayerController : MonoBehaviour
         lifeCounter--;
         UpdateLife();
 
-        if(lifeCounter > 0)
+        if (lifeCounter > 0)
         {
             Instantiate(particlePrefab, transform.position, transform.rotation);
 
@@ -303,9 +312,17 @@ public class AH_PlayerController : MonoBehaviour
         }
         else
         {
+            damage_PostProcess.profile.TryGet(out vg);
+            vg.intensity.value = 0f;
+
+            for (int i = 0; i < 3; i++)
+            {
+                vg.intensity.value += 0.1f;
+                yield return new WaitForSeconds(0.05f);
+            }
+
             StartCoroutine(GameOver_Death());
         }
-        
     }
 
     private IEnumerator GameOver_Death()
@@ -331,23 +348,6 @@ public class AH_PlayerController : MonoBehaviour
 
     //Falta sonido y post-procesado
 
-    /*damage_PostProcess.profile.TryGet(out vg);
-    vg.intensity.value = 0f;
-
-    for (int i = 0; i < 5; i++)
-    {
-        vg.intensity.value += 0.1f;
-        yield return new WaitForSeconds(0.05f);
-    }
-
-    for (int i = 5; i > 0; i--)
-    {
-        vg.intensity.value -= 0.1f;
-        yield return new WaitForSeconds(0.05f);
-    }
-
-    vg.intensity.value = 0f;
-    */
 
     //Ranking de score
 }
