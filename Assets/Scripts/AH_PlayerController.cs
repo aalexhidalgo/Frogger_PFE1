@@ -24,7 +24,7 @@ public class AH_PlayerController : MonoBehaviour
 
     private int stepScore = 5;
 
-    private bool isOnPlatform, isOnWater;
+    public bool isOnPlatform, isOnWater, isOnTurtle;
     private bool cooldown, attack;
 
     public GameObject bombDeathPrefab, particlePrefab, waterParticlePrefab; //ParticleSystem
@@ -144,21 +144,15 @@ public class AH_PlayerController : MonoBehaviour
             transform.parent = other.transform;
         }
 
-        if (other.gameObject.CompareTag("Turtle")) //Funciona :D (Hacer padre de las tortugitas)
+        if (other.gameObject.CompareTag("Turtle"))
         {
+            isOnTurtle = true;
+            transform.parent = other.transform;
             attack = true;
 
             if (TurtleAnimScript.underWater == true)
             {
-                Debug.Log("Hola");
                 cooldown = false;
-                StartCoroutine(Death(particlePrefab));
-
-                /*if (lifeCounter <= 0)
-                {
-                    lifeCounter = 0;
-                    StartCoroutine(GameOver_Death()); //GAMEOVER instantly
-                }*/
             }
         }
 
@@ -203,18 +197,19 @@ public class AH_PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Turtle"))
         {
-            if (TurtleAnimScript.underWater == true)
+            if (TurtleAnimScript.underWater == true && isOnTurtle == true)
             {
                 if (cooldown == false)
                 {
                     StartCoroutine(Cooldown_Turtle());
+                    StartCoroutine(Death(particlePrefab));
                 }
             }
         }
 
-        if (other.gameObject.CompareTag("Water")) //GAMEOVER instantly
+        if (other.gameObject.CompareTag("Water"))
         {
-            if (isOnPlatform == false)
+            if (isOnPlatform == false && isOnTurtle == false)
             {
                 if (cooldown == false)
                 {
@@ -234,6 +229,12 @@ public class AH_PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Platform")) //Outside platform
         {
             isOnPlatform = false;
+            transform.parent = null;
+        }
+
+        if (other.gameObject.CompareTag("Turtle")) //Outside turtle
+        {
+            isOnTurtle = false;
             transform.parent = null;
         }
     }

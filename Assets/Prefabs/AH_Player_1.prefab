@@ -124,8 +124,10 @@ MonoBehaviour:
   lifeCounter: 3
   bombDeathPrefab: {fileID: 1627051386201020091, guid: 493d6a304405d954d83de4f4766e9552, type: 3}
   particlePrefab: {fileID: 5489897523708966395, guid: fdd3a9fb55e362f4384ae1d33f30b5b2, type: 3}
+  waterParticlePrefab: {fileID: 5489897523708966395, guid: 87b8e16902dd30143bc70d7b806f5e3b, type: 3}
+  mysteryBoxparticle: {fileID: 5489897523708966395, guid: fca39e0262c35834aa7b5e8d5f92a0b3, type: 3}
   damage_PostProcess: {fileID: 0}
-  randIndx: 0
+  canvasNumber: {fileID: 1347695555734777425, guid: 5f4d36f0885742942b5e0875c8fe9ed7, type: 3}
 --- !u!61 &833290583784892831
 BoxCollider2D:
   m_ObjectHideFlags: 0
